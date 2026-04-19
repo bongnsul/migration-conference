@@ -780,6 +780,69 @@
     .speaker-monogram{width:48px;height:48px;font-size:16px;border-radius:14px}
     .talk-group-title{font-size:19px}
   }
+  @media (max-width:600px){
+    /* At-a-Glance cards → single column on phones */
+    .mini-schedule{grid-template-columns:1fr;gap:14px}
+    .mini-session{padding:20px}
+    .mini-title-kr{font-size:19px;line-height:1.3}
+    .mini-title{font-size:13px}
+    .schedule-intro{padding:24px 20px;border-radius:18px}
+    .schedule-intro .section-title{font-size:28px;line-height:1.2}
+    .mini-session.featured.has-content::after,
+    .mini-session.recommended.has-content::after{font-size:10.5px;padding:3px 9px;top:14px;right:14px}
+    .mini-papers li{font-size:13px;line-height:1.55}
+
+    /* Section titles & headers */
+    .section-title{font-size:26px;line-height:1.2}
+    .session-body h3{font-size:21px;line-height:1.3}
+    .talk-detail-header{padding:18px 18px;margin:36px 0 20px;border-radius:14px}
+    .talk-detail-header-title{font-size:19px;line-height:1.3}
+    .talk-detail-header-speaker{font-size:12px;line-height:1.5}
+
+    /* Summary / Key-points / Transcript boxes shrink padding & font */
+    .summary-text{font-size:15px;padding:18px 18px;border-radius:14px;line-height:1.7}
+    .key-points{padding-left:20px}
+    .key-points > li{font-size:14px;line-height:1.7;margin-bottom:14px;padding-left:6px}
+    .key-points > li ul li{font-size:13.5px;line-height:1.65}
+
+    /* Transcript */
+    .transcript{padding:18px 18px;font-size:14px;line-height:1.75;border-radius:14px;max-height:520px}
+    .transcript p{margin-bottom:12px}
+    .transcript .speaker{font-size:10.5px;padding:3px 8px}
+
+    /* Tabs (segmented control) */
+    .tab{font-size:12.5px;padding:9px 12px}
+    .tab-num{display:none}
+
+    /* Term-note / context-card / callout / further-read */
+    .term-note{padding:14px 16px;border-radius:12px;font-size:13.5px}
+    .term-note-label{font-size:10.5px}
+    details.context-card[open]{padding:18px 18px;border-radius:16px}
+    details.context-card > summary.context-card-label{padding:12px 14px;font-size:12px}
+    .callout{padding:16px 18px;border-radius:14px}
+    .callout-text{font-size:14px;line-height:1.6}
+    .further-read{font-size:13px;line-height:1.65;padding:12px 14px}
+
+    /* Speaker lines */
+    .speaker-line{font-size:13.5px;gap:8px;padding:6px 0}
+    .speaker-line .role-pill{font-size:9.5px;padding:2px 8px}
+    .speaker-line .affil{font-size:13px}
+
+    /* Footer & section spacing */
+    main{padding:40px 18px 60px}
+    .session{padding:32px 0;gap:14px}
+  }
+
+  @media (max-width:430px){
+    /* iPhone mini & similar — extra tightening */
+    .schedule-intro .section-title{font-size:24px}
+    .section-title{font-size:23px}
+    .session-body h3{font-size:19px}
+    .summary-text{font-size:14.5px;padding:16px 16px}
+    .key-points > li{font-size:13.5px}
+    .transcript{padding:16px 16px;font-size:13.5px}
+    .further-read{font-size:12.5px}
+  }
 </style>
 </head>
 <body>
@@ -1099,7 +1162,7 @@
 
             <div class="further-read">
               <span class="further-read-label">더 읽어보기</span>
-              <a href="https://sites.google.com/site/samuelbazzi/" target="_blank" rel="noopener">Bazzi 교수 개인 홈페이지</a>에서 논문 전문 무료 다운로드 가능 · <em>Handbook of the Economics of International Migration</em> Chapter 5 (Bazzi-Fiszbein, <a href="https://www.nber.org/papers/w30831" target="_blank" rel="noopener">NBER WP 30831</a>) — 이번 발표의 이론 토대 · 책 추천: Joseph Henrich, <a href="https://wwnorton.com/books/the-weirdest-people-in-the-world" target="_blank" rel="noopener"><em>"The WEIRDest People in the World"</em></a> (문화의 장기 경제 효과 대중서)
+              <a href="https://sites.google.com/site/samuelbazzi/" target="_blank" rel="noopener">Bazzi 교수 개인 홈페이지</a>에서 논문 전문 무료 다운로드 가능 · Bazzi & Fiszbein, <a href="https://www.nber.org/papers/w34001" target="_blank" rel="noopener"><em>"When Do Migrants Shape Culture?"</em></a> (NBER WP 34001, 2025) — 이번 발표의 이론 토대 (Handbook of Culture and Economic Behavior 챕터) · 책 추천: Joseph Henrich, <a href="https://us.macmillan.com/books/9780374710453/theweirdestpeopleintheworld/" target="_blank" rel="noopener"><em>"The WEIRDest People in the World"</em></a> (문화의 장기 경제 효과 대중서)
             </div>
           </div>
         </div>
@@ -1442,8 +1505,8 @@
               <p>1980년대 인도네시아 정부가 시행한, 세계적으로도 손꼽히는 대규모 정착 프로그램입니다. 자바·발리 같은 경제·정치 중심부에서 외곽 섬들(주변부)로 <strong>200만 명의 자발적 이주민</strong>을 보냈죠. 각 마을마다 현지인과 이주민이 섞여 살게 됐습니다.</p>
               <p>결과: 자바·발리의 <strong>낮은 출산율 규범</strong>이 외곽 섬 현지 여성에게 전파됐습니다. 그리고 <strong>이주민이 현지 여성의 출산 규범에 미친 영향력이, 현지 여성이 자기 공동체에서 물려받은 규범의 지속성보다 약 2배 더 컸습니다.</strong></p>
 
-              <span class="speaker">발표자 · 초지역적 전달</span>
-              <p>미국과 인도네시아 두 사례 모두에서, 저희는 바로 옆집 단위까지 분석할 수 있었습니다. KKK 가입·가정에서의 인도네시아어 사용·출산 규범 — 모두 뚜렷한 <strong>옆집 효과(neighbor effects)</strong>를 보였습니다. 자바·발리 출신 이주민이 바로 옆집에 살면, 당신의 출산 행동까지 영향을 받는다는 거죠.</p>
+              <span class="speaker">발표자 · 옆집 단위까지 추적한 영향</span>
+              <p>미국과 인도네시아 두 사례 모두에서, 저희는 <strong>바로 옆집 단위</strong>까지 분석할 수 있었습니다. KKK 가입·가정에서의 인도네시아어 사용·출산 규범 — 셋 다 뚜렷한 <strong>옆집 효과(neighbor effects)</strong>를 보였어요. 자바·발리 출신 이주민이 바로 옆집에 살면, 그 집의 출산 행동까지 영향을 받는다는 겁니다.</p>
 
               <span class="speaker">발표자 · 마무리</span>
               <p>이 프레임워크는 더 다양한 주제로 확장될 수 있습니다 — 사회적 송금(social remittances), 다차원적 정체성, 미디어·소셜미디어의 효과 등. 다만 한 가지 주의할 점: <strong>영향이 너무 빠르게, 너무 크게 일어나면 반드시 반발(backlash)이 따라옵니다.</strong></p>
@@ -3110,10 +3173,10 @@
           <li><strong>연구의 출발 질문</strong> — 고이민 국가에서 이민자 성과는 긍정적인데(미국 외국 출생 인구 1990년 8% → 현재 14%) 왜 반이민 정치는 동시에 성장해 왔는가? 이 모순을 풀기 위해 『Streets of Gold』 책과 이번 연구를 진행.</li>
           <li><strong>수백만 건의 인구조사 연결 — 방법론</strong> — 저자 본인의 동유럽 이민 가족사(넝마 장수 → 의사·변호사)에서 출발, Ancestry.com과 협력해 1850~1940 미국 인구조사를 이름·출생지 기반 알고리즘으로 연결. 1950년 자료도 최근 공개됨.</li>
           <li><strong>핵심 발견: 이민자 자녀 이동성은 100년 전과 같다</strong> — "옛날엔 빠르게 올라갔지만 지금 이민자는 영구 하층계급에 갇혀있다"는 통념은 <strong>거짓</strong>. 하위 25% 출신 이민자 자녀가 미국 태생 자녀보다 빠르게 상향. 아시아계 자녀는 <strong>60~70%분위 도달</strong>, 중남미계도 <strong>53%+</strong>. 유일한 예외는 카리브(아이티·자메이카·T&T) 출신 아들들.</li>
-          <li><strong>노르웨이의 교훈</strong> — 트럼프 1기 "왜 노르웨이 같은 나라에서는 안 오냐"는 발언. 실제 1880년대 노르웨이는 매우 가난해 <strong>4명 중 1명이 이민</strong> — 미네소타 어부로 고생했고 당시 기준 오늘 멕시코 이민자와 비슷한 처지. "100년의 시차가 그들을 이상화하는 것뿐."</li>
+          <li><strong>노르웨이의 교훈</strong> — 트럼프 1차 임기 시절 "왜 노르웨이 같은 나라 사람들은 안 오냐"는 발언이 있었음. 실제 1880년대 노르웨이는 매우 가난해 <strong>4명 중 1명이 미국으로 이민</strong> — 미네소타에서 어부로 고생했고, 당시 기준으로 보면 <strong>오늘날 멕시코 이민자와 비슷한 처지</strong>였음. "100년의 시차가 그들을 이상화하는 것뿐."</li>
           <li><strong>상향 이동의 비결 = 교육 아닌 지리</strong> — 이민자는 기회가 많은 지역(뉴욕 등)으로 이주한 반면 미국 태생은 미국 남부 등에 머묾. <strong>같은 지역에서 자란 이민자 자녀 vs 현지 자녀를 비교하면 격차가 사라진다</strong>. "움직일 수 있는 사람이 기회 있는 곳에 간다." (단, 오늘날에는 교육도 주요 요인으로 부상)</li>
           <li><strong>15개국 비교 — 딸과 아들의 다른 이야기</strong> — 40명 공저자, OECD 15개국 행정 데이터. <strong>딸들</strong>: 오스트리아·독일 포함 거의 모든 나라에서 현지 태생보다 상향 이동. <strong>아들들</strong>: 앵글로스피어(미·영·캐·이스라엘·이탈리아)에서만 상향. <strong>유럽 대륙</strong>(특히 독일·오스트리아·덴마크·프랑스·스웨덴 등): 오히려 뒤처짐. 주원인 = <strong>교육 제도</strong>(조기 트래킹·직업 교육 분리가 이민자 자녀에게 불리).</li>
-          <li><strong>정치 담론 분석 — 트럼프는 극단적 이상치</strong> — 1880년대 이후 미국 의회 + 유럽 8개국 의회 연설을 BERT/ChatGPT로 긍정/부정/중립 분류. 지난 60년 미국 대통령 평균 <strong>+50</strong>, 트럼프 <strong>−50</strong>(유럽 극우에 가까움). <strong>민주당은 OECD 전체에서 가장 친이민적</strong> — 유럽 녹색당보다도 더.</li>
+          <li><strong>정치 담론 분석 — 트럼프는 극단적 이상치</strong> — 1880년대 이후 미국 의회 + 유럽 8개국 의회 연설을 <strong>AI 자연어 분석 모델</strong>(BERT, ChatGPT)로 긍정/부정/중립 자동 분류. 지난 60년 미국 대통령 평균 <strong>+50</strong>(친이민), 트럼프 <strong>−50</strong>(유럽 극우 정당에 가까움). <strong>민주당은 OECD 전체에서 가장 친이민적</strong> — 유럽 녹색당보다도 더.</li>
           <li><strong>공화당의 비밀 = "주제"</strong> — 전체 감정 점수는 유럽 중도우파 수준이지만, 다루는 주제가 <strong>범죄·불법성·안보 위협</strong>에 집중. 경제·노동 이슈에서는 민주당과 비슷하게 중립적.</li>
           <li><strong>유럽의 2015년 분기점</strong> — 2014년까지 오스트리아·프랑스·덴마크·스웨덴은 초당적 친이민 합의. <strong>시리아 난민 사태 이후</strong> 중도우파가 반이민으로 이동, 극우 부상. "차이 없는 두 친이민 정당 vs 극우 대안 사이에서 일부 유권자가 극우로 넘어갔다."</li>
           <li><strong>결론 — 아메리칸 드림은 살아있다, 단 조건부로</strong> — 이민자 자녀의 상향 이동성은 100년 전과 동일. 단 이 효과는 <strong>영국식 제도(조기 트래킹 없는 개방 교육)를 물려받은 앵글로스피어</strong>에서만. 2010년대 유럽의 친이민 합의는 오히려 역사적 이상치였으며 지금은 풀리고 있다.</li>
@@ -4096,6 +4159,7 @@
           <div class="tabs" role="tablist">
             <button class="tab active" data-tab="sum-8c"><span class="tab-num">01</span>요약</button>
             <button class="tab" data-tab="key-8c"><span class="tab-num">02</span>주요 내용</button>
+            <button class="tab" data-tab="tr-8c"><span class="tab-num">03</span>전사본</button>
           </div>
 
           <div class="tab-content active" id="sum-8c">
@@ -4123,6 +4187,33 @@
               <li><strong>정책 함의</strong> — 단순히 "토지 개혁 + 도시화"가 뒤에 남겨진 아이 문제를 해결하지 않음. 오히려 <strong>후커우 제도가 아이들을 분리시키는 매개 변수</strong>라는 점을 다시 보여줌. 가족 동반 이주 정책이 필요.</li>
             </ol>
           </div>
+
+          <div class="tab-content" id="tr-8c">
+            <div class="transcript" style="max-height:560px;">
+              <p style="font-family:var(--kr);font-size:13.5px;color:var(--ink-3);background:var(--bg-soft);padding:14px 16px;border-radius:12px;margin-bottom:18px;line-height:1.7;">
+                💡 분과 4B는 Mazur(중국)·Inoue(일본) 두 발표가 한 세션(59분)에서 연속으로 진행되어 같은 녹음 파일에 담겨 있습니다. 아래는 Mazur 발표의 핵심 발췌(MacWhisper 자동 전사, 일부 오인식 포함). 전체 raw 전사본은 <code style="background:var(--line);padding:2px 6px;border-radius:4px;font-size:12.5px;">transcripts/08_parallel4B_mazur_china_inoue_japan_59min.txt</code> 참고.
+              </p>
+
+              <p><span class="speaker">Speaker · Karol Mazur (Peking University)</span></p>
+              <p><em>"So I'm Karl, I work at the Peking University HSBC Business School in Beijing... This is about specialist [mis-]allocation in China."</em></p>
+              <p><em>"From the literature point of view, we have pretty good evidence from the seminal work of Chetty and colleagues about Moving to Opportunity — that in the US, many people moving from poorer neighborhoods to more advantaged ones can shape outcomes in a positive way... Our paper will be trying to do something similar but in the context of China."</em></p>
+
+              <p><span class="speaker">발표자 · 핵심 가설</span></p>
+              <p><em>"Land insecurity can be one of the reasons why a family decides to leave some of the members behind. Usually it would be a spouse... When land security reforms are introduced, they are not so much worried anymore about having the land reallocated to someone else, and the whole family joins in the [migration]."</em></p>
+
+              <p><span class="speaker">발표자 · 토지 개혁 배경</span></p>
+              <p><em>"Chari and Clover (2021): improvement of the security of land in China has stimulated rent... Three years ago QJE by Chari, Molu and Clover looking beyond immediate agricultural land markets — they look at allocation of labor and they show that these reforms also stimulate occupational switching out of agriculture. And then there's a very recent working paper... showing that these reforms extract more women into manufacturing."</em></p>
+
+              <p><span class="speaker discussant">Discussant · Hyeseon Shin (Sogang University)</span></p>
+              <p><em>"The title says 'misplacement of talent' but the actual analysis is closer to 'the educational effect of urban exposure' — the framing needs to be tightened."</em></p>
+              <p><em>"Care is needed when interpreting binary outcome variables like college attendance — quality and duration of education are obscured."</em></p>
+              <p><em>"The IV is clean, but you need to disentangle whether the urban-exposure effect comes from educational resources or from networks and opportunities."</em></p>
+
+              <p style="font-family:var(--kr);font-size:12.5px;color:var(--ink-4);margin-top:18px;font-style:italic;">
+                ※ Whisper 자동 전사 결과로 일부 단어(예: "Chari" → "chari", "Chetty" → "chey" 등)에 오인식이 있을 수 있습니다.
+              </p>
+            </div>
+          </div>
         </div>
 
         <!-- 4B Paper 2: Shizuka Inoue -->
@@ -4149,11 +4240,17 @@
             <ol class="key-points">
               <li><strong>역사적 맥락</strong> — 1945년 일본 패전 후 조선·대만·만주·사할린·남태평양 등 구 식민지에서 <strong>약 300만~400만 일본인이 본토로 귀환</strong>. 일본 인구의 약 5% 규모 유입.</li>
               <li><strong>자본 vs. 노동 충격 구분</strong> — 귀환자는 <strong>약 1개월치 소득 상당의 현금만 허용</strong>되었고, 지정된 귀환 항구에서 검사관이 금·현금을 압수. 따라서 이 사건은 대체로 <strong>"순수 노동 충격"</strong>에 가깝다.</li>
-              <li><strong>연구 질문</strong> — 이 인구 충격이 일본 기업의 <em>근대화·생산성</em>에 어떤 영향을 미쳤나? 단순 노동 공급 증가 효과인가, 지역별 집적효과를 통한 기업 변환인가?</li>
-              <li><strong>핵심 결과</strong> — 귀환자가 더 많이 정착한 지역에서 <strong>기업 근대화가 가속</strong>됨. 전후 일본 경제 기적의 한 설명 요인으로 제시.</li>
-              <li><strong>토론자/청중 핵심 지적</strong> — (1) <em>1949년 중국의 산업 정책</em>이 동시기 일본 정책과 맞물리는가? 교란 변수 가능성. (2) 자본을 몰래 가져온(smuggling) 사례는 얼마나 실질적이었나? 항구 검사 엄격도 질문. (3) <em>집적 외부성(agglomeration externalities)</em>과 <em>인구 충격 자체의 영향</em>을 정량적으로 분리하기 어려움. 특히 화이트칼라 직종의 집적 효과는 섹터별로 다름.</li>
-              <li><strong>이론적 기여</strong> — 역사적 인구 충격이 경제 성장에 미친 인과 효과에 대한 최근 연구 흐름(예: 독일 통일, 시리아 난민) 중 일본 사례를 추가. 전후 일본 기적(Japanese Miracle) 재해석의 한 조각.</li>
-              <li><strong>추가 연구 방향</strong> — 화이트칼라 vs. 블루칼라 분리 분석, 섹터별 이질성, 집적 vs. 구성 효과 분해 등.</li>
+              <li><strong>연구 질문</strong> — 이 갑작스런 인구 유입이 일본 기업의 <em>근대화·생산성</em>에 어떤 영향을 줬나? 단순히 일손이 늘어난 효과일까, 아니면 <strong>"사람이 모이면 더 잘 일하게 되는 효과"(집적효과)</strong>를 통해 기업 자체가 바뀐 것일까?</li>
+              <li><strong>핵심 결과</strong> — 귀환자가 더 많이 정착한 지역에서 <strong>기업 근대화가 더 빠르게 진행</strong>됨. 전후 일본 경제 기적의 한 설명 요인으로 제시.</li>
+              <li><strong>토론자·청중 핵심 지적</strong> —
+                <ul style="margin:8px 0 0 0;padding-left:20px;line-height:1.8;">
+                  <li>(1) <strong>1949년 중국 산업 정책의 영향</strong>이 같은 시기 일본 결과에 섞여 있을 가능성 — 다른 원인이 결과를 오염시키지 않았는지 검토 필요 <em>(교란 변수)</em>.</li>
+                  <li>(2) 귀환자가 자본을 <strong>몰래 들여온 사례</strong>(smuggling)가 실제로 얼마나 많았나? 항구 검사가 정말 엄격했는지 검증 필요.</li>
+                  <li>(3) <strong>"사람이 모이면 더 잘 일하는 효과"</strong> <em>(집적 외부성, agglomeration externalities)</em>와 <strong>"단순히 일손이 많아진 효과"</strong>를 깔끔히 분리하기 어려움. 특히 사무직(화이트칼라)은 산업마다 집적효과 양상이 다름.</li>
+                </ul>
+              </li>
+              <li><strong>이론적 기여</strong> — 역사적 인구 충격이 경제 성장에 미친 인과 효과를 다룬 최근 연구 흐름(독일 통일·시리아 난민 등)에 <strong>일본 사례를 추가</strong>. 전후 일본 기적(Japanese Miracle)을 새로운 각도에서 재해석.</li>
+              <li><strong>추가 연구 방향</strong> — 사무직 vs 현장직 분리 분석, 산업별 차이 비교, "사람이 모여서 생긴 효과" vs "사람 구성이 달라져서 생긴 효과" 분해 등.</li>
             </ol>
           </div>
         </div>
