@@ -37,6 +37,11 @@
   .masthead{padding:20px 32px;border-bottom:1px solid var(--line-soft);background:var(--bg)}
   .masthead-top{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--ink-3);font-weight:500;max-width:1200px;margin:0 auto;flex-wrap:wrap;gap:8px}
   .masthead-top .dot{color:var(--ink-4);margin:0 6px}
+  .masthead-notice{text-align:right;font-size:11.5px;color:var(--ink-4);margin-top:6px;max-width:1200px;margin-left:auto;font-weight:500}
+  .masthead-notice-link{color:var(--blue);text-decoration:none;font-weight:600}
+  .masthead-notice-link:hover{text-decoration:underline}
+  .masthead-notice-email{color:var(--ink-3);text-decoration:none;font-weight:500}
+  .masthead-notice-email:hover{text-decoration:underline}
 
   /* ── Hero (Toss-style dark) ── */
   .hero{padding:96px 32px 80px;background:radial-gradient(ellipse at 30% 20%,#1e3a6b 0%,#0f1f3a 55%,#0a1628 100%);color:#fff;position:relative;overflow:hidden}
@@ -346,6 +351,9 @@
   .transcript-kr{display:none;font-family:var(--font);font-size:15px}
   .transcript-kr.active{display:block}
   .transcript-en.hidden{display:none}
+  .summary-kr.hidden{display:none}
+  .summary-en{display:none}
+  .summary-en.active{display:block}
 
   /* Pending panel */
   .pending-panel{padding:24px 28px;background:var(--bg-card);border-radius:18px;max-width:720px;border:none}
@@ -801,8 +809,9 @@
 
     /* Summary / Key-points / Transcript boxes shrink padding & font */
     .summary-text{font-size:15px;padding:18px 18px;border-radius:14px;line-height:1.7}
-    .key-points{padding-left:20px}
-    .key-points > li{font-size:14px;line-height:1.7;margin-bottom:14px;padding-left:6px}
+    .key-points{padding-left:0}
+    .key-points > li{font-size:14px;line-height:1.7;margin-bottom:14px;padding:16px 16px 16px 64px}
+    .key-points li::before{left:14px;top:16px;width:32px;height:32px;font-size:12px}
     .key-points > li ul li{font-size:13.5px;line-height:1.65}
 
     /* Transcript */
@@ -854,6 +863,9 @@
     <span>Internal Conference Report <span class="dot">●</span> For Team Distribution</span>
     <span>April 2026 <span class="dot">●</span> Yonsei University, Seoul</span>
   </div>
+  <div class="masthead-notice">
+    This page was produced by <a href="https://www.bongnsul.com/" target="_blank" rel="noopener" class="masthead-notice-link">Bong&amp;Sul Initiative</a> with the assistance of Claude Code, covering sessions attended by our team. For inquiries, contact <a href="mailto:team@bongnsul.com" class="masthead-notice-email">team@bongnsul.com</a>.
+  </div>
 </header>
 
 <section class="hero">
@@ -867,7 +879,7 @@
       </div>
       <p class="hero-sub">
         <strong>이민 경제학의 '세계 선수권 대회'.</strong>
-        연세대 인구와 인재 연구원(IPHC)이 주관하는 <strong>'제19회 국제 이민 및 개발 컨퍼런스'</strong>로,
+        연세대 <a href="https://pahc.yonsei.ac.kr/index.php" target="_blank" rel="noopener" style="color:#7ab6ff;text-decoration:underline;text-decoration-color:rgba(122,182,255,.4);">인구와 인재 연구원(IPHC)</a>이 주관하는 <strong>'제19회 국제 이민 및 개발 컨퍼런스'</strong>로,
         이주 관련 분야의 최정상급 해외 학자 20여 분과 함께 진행됐습니다.
       </p>
       <p class="hero-guide">
@@ -1017,38 +1029,81 @@
         <span class="speaker-line"><strong>Greetings:</strong> Albert Park (ADB, online) · Hyuncheol Bryant Kim (Yonsei) · Mushfiq Mobarak (Yale) · 이종관 Jongkwan Lee (Yonsei)</span>
       </div>
 
-      <div class="summary-text" style="margin-top:20px;">
-        <p class="lead">첫날 아침, 네 명의 주최 기관 대표가 차례로 무대에 올랐습니다. <strong>각자의 조직 관점에서 "왜 지금, 왜 이 컨퍼런스가 필요한가"</strong>를 짧지만 날카롭게 풀어낸 시간.</p>
+      <div class="transcript-controls" style="padding-bottom:4px;margin-top:20px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr" onclick="(function(btn){var controls=btn.closest('.transcript-controls');var container=btn.closest('.session-body');var btns=controls.querySelectorAll('.sum-lang-btn');btns.forEach(function(b){b.classList.remove('active')});btn.classList.add('active');var kr=container.querySelector('.summary-kr');var en=container.querySelector('.summary-en');if(btn.dataset.lang==='kr'){kr.classList.remove('hidden');en.classList.remove('active')}else{kr.classList.add('hidden');en.classList.add('active')}})(this)">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en" onclick="(function(btn){var controls=btn.closest('.transcript-controls');var container=btn.closest('.session-body');var btns=controls.querySelectorAll('.sum-lang-btn');btns.forEach(function(b){b.classList.remove('active')});btn.classList.add('active');var kr=container.querySelector('.summary-kr');var en=container.querySelector('.summary-en');if(btn.dataset.lang==='kr'){kr.classList.remove('hidden');en.classList.remove('active')}else{kr.classList.add('hidden');en.classList.add('active')}})(this)">English</button>
+      </div>
+      <div class="summary-kr">
+        <div class="summary-text" style="margin-top:12px;">
+          <p class="lead">첫날 아침, 네 명의 주최 기관 대표가 차례로 무대에 올랐습니다. <strong>각자의 조직 관점에서 "왜 지금, 왜 이 컨퍼런스가 필요한가"</strong>를 짧지만 날카롭게 풀어낸 시간.</p>
 
-        <p>이틀간의 컨퍼런스가 단순한 학술 발표의 연속이 아니라 <em>"아시아가 이주·개발 연구의 중심축으로 이동하는 순간"</em>이라는 메시지가 환영사 전체를 관통했어요.</p>
+          <p>이틀간의 컨퍼런스가 단순한 학술 발표의 연속이 아니라 <em>"아시아가 이주·개발 연구의 중심축으로 이동하는 순간"</em>이라는 메시지가 환영사 전체를 관통했어요.</p>
 
-        <div class="term-note" style="border-left-color:var(--blue-dark);">
-          <span class="term-note-label">환영사 1 — Albert Park (ADB 수석 이코노미스트, 온라인 참여)</span>
-          <p style="margin:0 0 8px 0;">아시아개발은행의 수석 이코노미스트로서 <strong>"이주는 개발의 중심에 있다"</strong>는 한 문장으로 오프닝을 시작.</p>
-          <p style="margin:0 0 8px 0;">몇 개 숫자로 그 중심성을 증명했어요 — 2024년 세계 국제 이주자는 <strong>3억 400만 명</strong>(세계 인구의 3.7%), 그중 <strong>아시아가 세계 최대 송출 지역이자 최대 수용 지역</strong>. 2024년 전 세계 송금액은 <strong>9,950억 달러</strong> — 공식 개발원조(ODA)의 몇 배, 외국인 직접 투자(FDI)의 절반에 이르는 엄청난 규모.</p>
-          <p style="margin:0 0 8px 0;">송금이 얼마나 중요한지 실감나는 예시: 네팔은 <strong>중동에서 오는 송금만으로 GDP의 8%+</strong>, 파키스탄 5%+, 스리랑카·방글라데시·필리핀 2.5~3%. 한 나라 경제의 기둥 역할을 하는 거죠.</p>
-          <p style="margin:0;">Park 박사가 남긴 화두: <em>"이주가 개발을 위해 무엇을 할 수 있고, 개발 정책이 이주를 위해 무엇을 할 수 있는가(What can migration do for development, and what can development policy do for migration?)"</em> — 이틀간 이 질문이 모든 발표를 관통하는 축이 됐습니다.</p>
+          <div class="term-note" style="border-left-color:var(--blue-dark);">
+            <span class="term-note-label">환영사 1 — Albert Park (ADB 수석 이코노미스트, 온라인 참여)</span>
+            <p style="margin:0 0 8px 0;">아시아개발은행의 수석 이코노미스트로서 <strong>"이주는 개발의 중심에 있다"</strong>는 한 문장으로 오프닝을 시작.</p>
+            <p style="margin:0 0 8px 0;">몇 개 숫자로 그 중심성을 증명했어요 — 2024년 세계 국제 이주자는 <strong>3억 400만 명</strong>(세계 인구의 3.7%), 그중 <strong>아시아가 세계 최대 송출 지역이자 최대 수용 지역</strong>. 2024년 전 세계 송금액은 <strong>9,950억 달러</strong> — 공식 개발원조(ODA)의 몇 배, 외국인 직접 투자(FDI)의 절반에 이르는 엄청난 규모.</p>
+            <p style="margin:0 0 8px 0;">송금이 얼마나 중요한지 실감나는 예시: 네팔은 <strong>중동에서 오는 송금만으로 GDP의 8%+</strong>, 파키스탄 5%+, 스리랑카·방글라데시·필리핀 2.5~3%. 한 나라 경제의 기둥 역할을 하는 거죠.</p>
+            <p style="margin:0;">Park 박사가 남긴 화두: <em>"이주가 개발을 위해 무엇을 할 수 있고, 개발 정책이 이주를 위해 무엇을 할 수 있는가(What can migration do for development, and what can development policy do for migration?)"</em> — 이틀간 이 질문이 모든 발표를 관통하는 축이 됐습니다.</p>
+          </div>
+
+          <div class="term-note" style="border-left-color:#5eddb8;">
+            <span class="term-note-label" style="background:rgba(94,221,184,.2);color:#5eddb8;">환영사 2 — Hyuncheol Bryant Kim (연세대 인구와인재연구원 소장)</span>
+            <p style="margin:0 0 8px 0;">연세대 IPHC 소장이자 이번 컨퍼런스 공동 주최자. <strong>"한국은 OECD에서 가장 빠르게 고령화되는 나라이고, 이민은 이제 선택이 아니라 필수입니다."</strong> 한 문장으로 한국의 현실을 정리.</p>
+            <p style="margin:0 0 8px 0;">전체 홀을 웃긴 농담도 하나 — <em>"Every country that brings in workers ends up with neighbors"</em>(노동자를 들이는 모든 나라는 결국 이웃을 얻는다). 노동자와 이웃, <strong>labor와 neighbor</strong>가 L/N 발음이 한국인에게 헷갈린다며 웃었고, 이 한 마디가 이 컨퍼런스 전체의 주제의식을 압축합니다 — "우리는 노동력을 받지만, 실제로 오는 건 사람이고 이웃이다."</p>
+            <p style="margin:0;">IPHC 소개도 잊지 않았어요 — 연세대 경제학과와 의대가 합작으로 만든 학제간 연구원으로, 봉서장학재단의 지원을 받아 설립. <strong>"이제는 증거 기반(evidence-based) 이민 정책 설계가 필요한 시점"</strong>이 IPHC의 설립 취지.</p>
+          </div>
+
+          <div class="term-note" style="border-left-color:#bbaaff;">
+            <span class="term-note-label" style="background:rgba(164,140,255,.2);color:#bbaaff;">환영사 3 — Mushfiq Mobarak (Yale Y-RISE 이사)</span>
+            <p style="margin:0 0 8px 0;">이 컨퍼런스 시리즈를 10여 년간 이끌어온 주역. 이번 19회 컨퍼런스에 대한 결정적 한 마디: <strong>"19년 역사 끝에 처음으로 아시아에서 열린다."</strong></p>
+            <p style="margin:0 0 8px 0;">2011년 파리에서 시작된 이후 줄곧 유럽과 미국을 오갔는데, 이번에 처음으로 서울. 그 의미가 크다고 두 가지 이유를 댔어요:</p>
+            <p style="margin:0 0 8px 0;">(1) <strong>아시아 내부 이주 경로가 정책적으로 매우 중요해졌다</strong> — 세계에서 가장 역동적인 노동 이동이 아시아에서 일어나고 있다는 것. (2) <strong>미국이 연구 지원 리더십을 일부 놓치면서, 증거 기반 정책 연구의 글로벌 지원을 아시아가 이어받을 때가 됐다.</strong> 한국은 훌륭한 연구자·대학을 빠르게 축적 중이고, 일본·중국·홍콩·말레이시아·싱가포르도 같은 방향으로 움직이고 있다고.</p>
+            <p style="margin:0 0 8px 0;">경쟁도 치열했습니다 — <strong>215편 지원 → 20편 선정</strong>(10% 미만 수락률). 이번 프로그램이 이틀간 여러분이 듣게 될 '엄선된 20편'이라는 얘기.</p>
+            <p style="margin:0;">마지막으로 정책 연계를 강조 — 학술 발표 외에 <strong>두 개의 정책 토론회</strong>(Day 1 디지털 송금, Day 2 한국 이민정책)를 별도 편성. 유럽·북미의 이주 정치가 복잡해진 지금이야말로 <em>"잘 관리된(carefully managed) 이주 경로"</em> 설계가 절실하다는 입장.</p>
+          </div>
+
+          <div class="term-note" style="border-left-color:#ffc36a;">
+            <span class="term-note-label" style="background:rgba(255,178,63,.18);color:#ffc36a;">환영사 4 — 이종관 (연세대 · 공동 주최 교수)</span>
+            <p style="margin:0;">컨퍼런스 실무를 책임진 연세대 이종관 교수는 짧게 운영상 공지와 감사 인사를 남겼어요. 참가자 명단·세션 이동·점심 장소 등 실용 안내 중심. Day 2 정책 라운드테이블에서 <strong>"한국 이민 제도 개선 방향"</strong>을 직접 발표하게 되며, 이번 컨퍼런스의 한국 측 앵커 역할을 맡음.</p>
+          </div>
         </div>
+      </div>
+      <div class="summary-en">
+        <div class="summary-text" style="margin-top:12px;">
+          <p class="lead">On the first morning, four representatives from the co-organizing institutions took the stage in succession. Each framed <strong>the same essential question — "Why now? Why this conference?" — from their own institutional vantage point</strong>, with remarks that were brief but pointed.</p>
 
-        <div class="term-note" style="border-left-color:#5eddb8;">
-          <span class="term-note-label" style="background:rgba(94,221,184,.2);color:#5eddb8;">환영사 2 — Hyuncheol Bryant Kim (연세대 인구와인재연구원 소장)</span>
-          <p style="margin:0 0 8px 0;">연세대 IPHC 소장이자 이번 컨퍼런스 공동 주최자. <strong>"한국은 OECD에서 가장 빠르게 고령화되는 나라이고, 이민은 이제 선택이 아니라 필수입니다."</strong> 한 문장으로 한국의 현실을 정리.</p>
-          <p style="margin:0 0 8px 0;">전체 홀을 웃긴 농담도 하나 — <em>"Every country that brings in workers ends up with neighbors"</em>(노동자를 들이는 모든 나라는 결국 이웃을 얻는다). 노동자와 이웃, <strong>labor와 neighbor</strong>가 L/N 발음이 한국인에게 헷갈린다며 웃었고, 이 한 마디가 이 컨퍼런스 전체의 주제의식을 압축합니다 — "우리는 노동력을 받지만, 실제로 오는 건 사람이고 이웃이다."</p>
-          <p style="margin:0;">IPHC 소개도 잊지 않았어요 — 연세대 경제학과와 의대가 합작으로 만든 학제간 연구원으로, 봉서장학재단의 지원을 받아 설립. <strong>"이제는 증거 기반(evidence-based) 이민 정책 설계가 필요한 시점"</strong>이 IPHC의 설립 취지.</p>
-        </div>
+          <p>A single theme ran through all four addresses: this two-day gathering was not merely another academic conference but <em>"the moment Asia moves to the center of migration and development research."</em></p>
 
-        <div class="term-note" style="border-left-color:#bbaaff;">
-          <span class="term-note-label" style="background:rgba(164,140,255,.2);color:#bbaaff;">환영사 3 — Mushfiq Mobarak (Yale Y-RISE 이사)</span>
-          <p style="margin:0 0 8px 0;">이 컨퍼런스 시리즈를 10여 년간 이끌어온 주역. 이번 19회 컨퍼런스에 대한 결정적 한 마디: <strong>"19년 역사 끝에 처음으로 아시아에서 열린다."</strong></p>
-          <p style="margin:0 0 8px 0;">2011년 파리에서 시작된 이후 줄곧 유럽과 미국을 오갔는데, 이번에 처음으로 서울. 그 의미가 크다고 두 가지 이유를 댔어요:</p>
-          <p style="margin:0 0 8px 0;">(1) <strong>아시아 내부 이주 경로가 정책적으로 매우 중요해졌다</strong> — 세계에서 가장 역동적인 노동 이동이 아시아에서 일어나고 있다는 것. (2) <strong>미국이 연구 지원 리더십을 일부 놓치면서, 증거 기반 정책 연구의 글로벌 지원을 아시아가 이어받을 때가 됐다.</strong> 한국은 훌륭한 연구자·대학을 빠르게 축적 중이고, 일본·중국·홍콩·말레이시아·싱가포르도 같은 방향으로 움직이고 있다고.</p>
-          <p style="margin:0 0 8px 0;">경쟁도 치열했습니다 — <strong>215편 지원 → 20편 선정</strong>(10% 미만 수락률). 이번 프로그램이 이틀간 여러분이 듣게 될 '엄선된 20편'이라는 얘기.</p>
-          <p style="margin:0;">마지막으로 정책 연계를 강조 — 학술 발표 외에 <strong>두 개의 정책 토론회</strong>(Day 1 디지털 송금, Day 2 한국 이민정책)를 별도 편성. 유럽·북미의 이주 정치가 복잡해진 지금이야말로 <em>"잘 관리된(carefully managed) 이주 경로"</em> 설계가 절실하다는 입장.</p>
-        </div>
+          <div class="term-note" style="border-left-color:var(--blue-dark);">
+            <span class="term-note-label">Welcome 1 — Albert Park (Chief Economist, ADB · joining online)</span>
+            <p style="margin:0 0 8px 0;">The Asian Development Bank's Chief Economist opened with a single thesis: <strong>"Migration is at the heart of development."</strong></p>
+            <p style="margin:0 0 8px 0;">He backed it with numbers. In 2024, the world's international migrants numbered <strong>304 million</strong> — 3.7% of the global population — and <strong>Asia is simultaneously the world's largest sender and largest receiver of migrants</strong>. Global remittance flows that year reached <strong>$995 billion</strong>, dwarfing official development assistance and approaching half of all foreign direct investment.</p>
+            <p style="margin:0 0 8px 0;">To make remittances tangible, he offered country examples: Nepal draws <strong>over 8% of GDP</strong> from Gulf remittances alone; Pakistan over 5%; Sri Lanka, Bangladesh, and the Philippines each between 2.5 and 3%. For these economies, remittances are a structural pillar, not a footnote.</p>
+            <p style="margin:0;">Park closed with the animating question for the two days ahead: <em>"What can migration do for development — and what can development policy do for migration?"</em> It proved to be the thread that connected every session.</p>
+          </div>
 
-        <div class="term-note" style="border-left-color:#ffc36a;">
-          <span class="term-note-label" style="background:rgba(255,178,63,.18);color:#ffc36a;">환영사 4 — 이종관 (연세대 · 공동 주최 교수)</span>
-          <p style="margin:0;">컨퍼런스 실무를 책임진 연세대 이종관 교수는 짧게 운영상 공지와 감사 인사를 남겼어요. 참가자 명단·세션 이동·점심 장소 등 실용 안내 중심. Day 2 정책 라운드테이블에서 <strong>"한국 이민 제도 개선 방향"</strong>을 직접 발표하게 되며, 이번 컨퍼런스의 한국 측 앵커 역할을 맡음.</p>
+          <div class="term-note" style="border-left-color:#5eddb8;">
+            <span class="term-note-label" style="background:rgba(94,221,184,.2);color:#5eddb8;">Welcome 2 — Hyuncheol Bryant Kim (Director, IPHC · Yonsei University)</span>
+            <p style="margin:0 0 8px 0;">As director of Yonsei's Institute for Population, Health, and Careers and co-host of the conference, Kim opened with a stark demographic frame: <strong>"Korea is aging faster than any other OECD country — immigration is no longer a choice but a necessity."</strong></p>
+            <p style="margin:0 0 8px 0;">He then drew laughter from the hall with a line that turned out to be the most quoted of the day: <em>"Every country that brings in workers ends up with neighbors."</em> The joke, he explained, plays on the Korean tendency to confuse the L and N sounds in "labor" and "neighbor" — but the punchline carries the conference's central conviction: <strong>when you open your door to workers, you are actually welcoming people and neighbors.</strong></p>
+            <p style="margin:0;">He closed with a brief introduction to IPHC — an interdisciplinary institute jointly created by Yonsei's Economics and Medical schools with support from the Bongnsul Scholarship Foundation — and its founding rationale: <strong>"The time has come for evidence-based immigration policy design."</strong></p>
+          </div>
+
+          <div class="term-note" style="border-left-color:#bbaaff;">
+            <span class="term-note-label" style="background:rgba(164,140,255,.2);color:#bbaaff;">Welcome 3 — Mushfiq Mobarak (Director, Y-RISE · Yale University)</span>
+            <p style="margin:0 0 8px 0;">The driving force behind the conference series for over a decade, Mobarak underscored the historic weight of the occasion with one sentence: <strong>"After 19 years, this conference is being held in Asia for the very first time."</strong></p>
+            <p style="margin:0 0 8px 0;">Founded in Paris in 2011, the series had rotated between Europe and North America ever since — until Seoul. He offered two reasons why the shift matters:</p>
+            <p style="margin:0 0 8px 0;">(1) <strong>Intra-Asian migration corridors have become among the most policy-consequential in the world</strong> — the most dynamic labor movements on the planet are now happening within Asia. (2) <strong>As the United States steps back from funding leadership in research, Asia is positioned to take the baton on globally relevant, evidence-based policy research.</strong> Korea is rapidly building its researcher and university base, and Japan, China, Hong Kong, Malaysia, and Singapore are moving in the same direction.</p>
+            <p style="margin:0 0 8px 0;">The selection process reflected that ambition: <strong>215 submissions, 20 accepted</strong> — an acceptance rate below 10%. The two-day program is the result.</p>
+            <p style="margin:0;">He closed on the policy dimension: alongside the academic sessions, <strong>two dedicated policy roundtables</strong> were programmed (digital remittances on Day 1, Korea immigration policy on Day 2). In an era when migration politics in Europe and North America have grown increasingly fraught, he argued, the design of <em>"carefully managed migration corridors"</em> has never been more urgent.</p>
+          </div>
+
+          <div class="term-note" style="border-left-color:#ffc36a;">
+            <span class="term-note-label" style="background:rgba(255,178,63,.18);color:#ffc36a;">Welcome 4 — Jongkwan Lee (Professor, Yonsei University · Co-organizer)</span>
+            <p style="margin:0;">Professor Lee, who handled the operational side of the conference at Yonsei, kept his remarks brief — logistics, participant lists, session locations, lunch arrangements. He will serve as the Korean anchor throughout the event, presenting on <strong>"Directions for Improving Korea's Immigration System"</strong> at the Day 2 policy roundtable.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1098,6 +1153,12 @@
       </div>
 
       <div class="tab-content active" id="sum-1">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+        <div class="summary-kr">
         <div class="summary-text">
           <p class="lead">이주민이 새로운 사회에 들어오면, <strong>현지 문화에는 어떤 일이 벌어질까요?</strong></p>
 
@@ -1168,7 +1229,49 @@
             </div>
           </div>
         </div>
-      </div>
+              </div>
+        <div class="summary-en">
+          <div class="summary-text">
+          <p class="lead">When migrants enter a new society, <strong>what actually happens to the culture around them?</strong></p>
+
+          <p><strong>Samuel Bazzi (UCSD)</strong> opens his keynote with a clean three-part framework. Migration can produce <em>assimilation</em> — newcomers adopt local culture — or <em>persistence</em> — migrants keep their own norms intact. But the session focuses on the third, most politically charged possibility: <em>cultural influence</em>, where migrants reshape the host society. His question is precise: <strong>under what conditions does this actually happen?</strong></p>
+
+          <p>The framework names three requirements:</p>
+
+          <ul class="inline-list">
+            <li><strong>Ideological intensity</strong> — how strongly committed migrants are to their own culture and values</li>
+            <li><strong>Relative power</strong> — whether migrants hold positions at the destination that let them translate those commitments into influence</li>
+            <li><strong>Transmission channels</strong> — whether the cultural change can actually move through pathways: parent to child, neighbor to neighbor, or leader to community</li>
+          </ul>
+
+          <p>Bazzi tests the framework against two historical cases. After the Civil War, displaced white Southerners carried white-supremacist ideology into Northern and Western communities — they were ideologically intense, seized positions of local authority, and transmitted norms through churches, schools, and the press. Indonesia's 1980s <em>transmigration</em> program relocated two million Javanese and Balinese to outer islands; wherever the three conditions aligned, migrants' fertility norms and language actually reshaped local behavior. Both cases confirm the same logic.</p>
+
+          <p>The counterintuitive conclusion: migrants <em>can</em> reshape culture, but <strong>the window for that is far narrower today than in those historical episodes</strong>. Modern societies have entrenched institutions, codified norms, and pervasive media. The populist claim that "migrants changed American culture before, so they will again" is, Bazzi argues, a historically illiterate analogy — the conditions that made influence possible then simply do not hold now.</p>
+
+          <div class="context-card">
+            <div class="context-card-label">Additional context</div>
+
+            <h4>Why this research matters — the landscape of cultural economics</h4>
+            <p>This keynote maps the frontier of <em>cultural economics</em>, an economics subfield that has grown rapidly over the past 15 years. For decades economics assumed fixed preferences. That assumption is being overturned — <strong>culture turns out to be far more malleable than once believed, shaped by institutions, migration, and historical events</strong>.</p>
+            <p>Bazzi is one of the leading figures in this field. His major papers include:</p>
+            <ul>
+              <li><strong>"Frontier and the American Dream" (QJE)</strong> — tracing how rugged individualism was forged on the American frontier, and how it underlies today's culture wars</li>
+              <li><strong>"Confederate Diaspora"</strong> — the empirical centerpiece of this keynote: how post-Civil War Southern migration spread racial hierarchy across the US</li>
+              <li><strong>Indonesia Transmigration series</strong> — tracing decades of effects on fertility, language, and institutions from internal migration</li>
+              <li><strong>Handbook chapter (with Martin Fiszbein)</strong> — the theoretical backbone of the talk, synthesizing the migration-culture-institutions relationship</li>
+            </ul>
+
+            <h4>Policy implications for Korea</h4>
+            <p>Bazzi's three conditions — ideological intensity, relative power, transmission channels — should inform how Korea designs immigrant selection and integration. The current structure (short-term rotation, limited integration infrastructure) likely suppresses all three conditions. That means cultural influence from current migrants is minimal — but it also means the integration system is not doing the work needed to ensure cultural cohesion long term.</p>
+
+            <div class="further-read">
+              <span class="further-read-label">Further reading</span>
+              <a href="https://sites.google.com/site/samuelbazzi/" target="_blank" rel="noopener">Bazzi's homepage</a> — working papers available free · Bazzi &amp; Fiszbein, <a href="https://www.nber.org/papers/w34001" target="_blank" rel="noopener"><em>"When Do Migrants Shape Culture?"</em></a> (NBER WP 34001, 2025) · Joseph Henrich, <a href="https://us.macmillan.com/books/9780241998779/theweirdestpeopleintheworld/" target="_blank" rel="noopener"><em>"The WEIRDest People in the World"</em></a>
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
 
       <div class="tab-content" id="key-1">
         <ol class="key-points">
@@ -1758,6 +1861,12 @@
         </div>
 
         <div class="tab-content active" id="sum-2a">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+          <div class="summary-kr">
           <div class="summary-text">
             <p class="lead">비자 하나가 바뀌면, <strong>사람들의 결혼 시기와 여성의 교육까지 바뀔 수 있습니다.</strong></p>
 
@@ -1818,7 +1927,53 @@
               </div>
             </div>
           </div>
-        </div>
+                  </div>
+          <div class="summary-en">
+            <div class="summary-text">
+            <p class="lead">A single change to a visa eligibility rule — lowering the minimum age for Palestinian work permits — <strong>sent ripple effects through marriage markets and girls' education</strong> in ways no policymaker had anticipated.</p>
+
+            <p><strong>Daliah Al-Shakhshir (Stanford)</strong> studies the Israeli work permit system for Palestinians. To work legally in Israeli construction — which employs <strong>15–40% of the West Bank workforce</strong> — Palestinian men need a permit issued by Israel. The permit requires two things: a minimum age, and proof of marriage. The logic: married men with established families are less likely to overstay.</p>
+
+            <p>Between 2012 and 2015, the age minimum was lowered from <strong>30 to 22</strong>. Men could qualify earlier — but they still needed to be married. The behavioral response was swift: men started marrying younger to gain access to the permit. What Al-Shakhshir documents carefully is that the story didn't stop with men.</p>
+
+            <p>Women began marrying earlier too — drawn into the marriage market by increased demand from younger men. The downstream consequences:</p>
+
+            <ul class="inline-list">
+              <li><strong>Earlier first births</strong> among women in high-exposure regions</li>
+              <li><strong>Lower educational attainment</strong> — schooling cut short by earlier marriage</li>
+              <li><strong>Stronger effects in areas more dependent on Israeli construction employment</strong></li>
+            </ul>
+
+            <p>The primary policy goal — discouraging long-term residency — was achieved only modestly. The secondary effect — distorting marriage markets and women's educational trajectories — was far larger. The paper's core message: <strong>immigration policy that targets workers shapes the families they leave behind</strong>, often in ways that run well beyond the policy's intended scope.</p>
+
+            <div class="term-note">
+              <span class="term-note-label">Method note</span>
+              <strong>Triple-difference (DDD)</strong> — the paper uses variation across three dimensions simultaneously: birth cohort (age), regional dependence on Israeli construction, and policy timing. This three-way comparison isolates the visa policy's causal effect from confounding factors.
+            </div>
+
+            <div class="term-note is-discussant">
+              <span class="term-note-label">Discussant — Eleanor Jawon Choi (Hanyang University)</span>
+              <p style="margin:0 0 10px 0;">Prof. Choi praised the paper for showing how a male-targeted policy ripples into women's lives, and raised three methodological concerns:</p>
+              <ol style="margin:0 0 0 20px;padding:0;font-size:14px;line-height:1.7;">
+                <li><strong>Ceiling effects in the comparison group</strong> — men over 30 are almost all already married; using them as the control may exaggerate the effect on younger men. Using age at first marriage rather than a binary married/unmarried measure would address this.</li>
+                <li><strong>The marriage-market mechanism needs direct evidence</strong> — the link from "more men marrying young" to "women also marrying young" is the core claim but isn't directly shown. Matched-couple data showing men are marrying systematically younger women would strengthen it.</li>
+                <li><strong>Continuous exposure measure preferred</strong> — regions are divided into high/low exposure, but actual dependence on Israeli construction varies continuously. Using it as a continuous variable would yield richer estimates.</li>
+              </ol>
+            </div>
+
+            <details class="context-card">
+              <summary class="context-card-label">Additional context</summary>
+              <h4>Why this research is distinctive — tracking second-order policy effects</h4>
+              <p>One of the hardest questions in policy analysis is: <em>"What will this policy do to domains I'm not targeting?"</em> Al-Shakhshir's study is a rare documented case of a labor policy producing measurable spillovers into marriage timing and girls' education. The term economists use is <strong>spillover effects</strong> — and in tightly linked communities like the West Bank, they can dwarf the intended effect.</p>
+              <p>Audience member Mobarak drew a parallel to David Atkin's Mexico study: export manufacturing expansion there also pulled young people out of schooling, sacrificing education for near-term income gains. The pattern — <em>economic opportunity at the cost of female education</em> — recurs across developing and conflict-affected economies.</p>
+              <div class="further-read">
+                <span class="further-read-label">Further reading</span>
+                <a href="https://sites.google.com/view/dalshakhshir" target="_blank" rel="noopener">Daliah Al-Shakhshir's homepage</a> (Stanford GSB) · David Atkin, <a href="https://www.aeaweb.org/articles?id=10.1257/aer.20120901" target="_blank" rel="noopener"><em>"Endogenous Skill Acquisition and Export Manufacturing in Mexico"</em></a> (AER 2016) · World Bank <a href="https://wbl.worldbank.org/" target="_blank" rel="noopener"><em>"Women, Business and the Law"</em></a>
+              </div>
+            </details>
+            </div>
+          </div>
+          </div>
 
         <div class="tab-content" id="key-2a">
           <ol class="key-points">
@@ -1913,6 +2068,12 @@
         </div>
 
         <div class="tab-content active" id="sum-2b">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+          <div class="summary-kr">
           <div class="summary-text">
             <p class="lead">이주 노동자를 <strong>"내보내는" 대신 "머물게 하면"</strong> 경제에 어떤 변화가 일어날까 — 한국이 실제로 해본 실험입니다.</p>
 
@@ -1979,7 +2140,51 @@
               </div>
             </div>
           </div>
-        </div>
+                  </div>
+          <div class="summary-en">
+            <div class="summary-text">
+            <p class="lead">What happens when Korea <strong>stops cycling workers out after five years</strong> and instead lets the same person stay, grow, and settle? The first rigorous evidence says it works — and works more strongly outside Seoul than inside it.</p>
+
+            <p><strong>Jongkwan Lee (Yonsei University)</strong> analyzes the E-7-4 "skilled migrant" visa introduced in Korea in 2017. The background: Korea's <em>Employment Permit System (EPS)</em>, in place since 2004, required foreign workers to leave after roughly five years — regardless of how much firm-specific expertise they had built. Every departure meant losing workers who had just become fluent in Korean and in their company's operations. The cycle was expensive for firms and wasteful for workers.</p>
+
+            <p>E-7-4 created a pathway out of the churn. Workers meeting thresholds on tenure, Korean language ability, and skill credentials could convert to stable long-term status, with family accompaniment permitted. Lee's event study across <strong>227 municipal units</strong> finds three things:</p>
+
+            <ul class="inline-list">
+              <li><strong>Vacancy rates fell</strong> — especially outside Seoul, where labor shortages were most acute. Firms that had struggled to find workers saw the pressure ease.</li>
+              <li><strong>Value-added per worker rose</strong> — experienced workers staying longer compounds into productivity gains. This effect was stronger in the Seoul metro area.</li>
+              <li><strong>Domestic employment and wages showed no significant change</strong> — the standard fear that migrants displace domestic workers finds no empirical support here.</li>
+            </ul>
+
+            <p>The policy implication is straightforward: in Korea's context of acute demographic decline, a system that retains skilled, experienced workers is better for both firms and regional economies than one that forces regular replacement. Lee's research directly underpins the policy case — made in the Day 2 roundtable — for expanding E-7-4, permitting family accompaniment, and exploring regionally targeted visa pathways.</p>
+
+            <div class="term-note">
+              <span class="term-note-label">Connection point</span>
+              This research is among the first to use Korean administrative data to cleanly measure the economic effect of a visa regime change. It provides the empirical foundation for the policy shift that Ministry of Justice Director Lee Jaehyeong described in the Day 2 roundtable — Korea moving from "whether to admit migrants" to "how to manage them better."
+            </div>
+
+            <div class="term-note is-discussant">
+              <span class="term-note-label">Discussant — Jun Goto (GRIPS / J-PAL Japan)</span>
+              <p style="margin:0 0 10px 0;">Goto compared the Korean experience to Japan's own transition from short-term to long-term foreign worker status, and raised two questions:</p>
+              <ol style="margin:0 0 0 20px;padding:0;font-size:14px;line-height:1.7;">
+                <li><strong>Selection transparency</strong> — the current results show what happened to workers who converted to E-7-4, but the criteria employers used to identify which workers qualified are a black box. Disentangling policy effects from selection effects requires clearer evidence on who was chosen and why.</li>
+                <li><strong>Social integration outcomes</strong> — E-7-4 allows family accompaniment. Children enter Korean schools. Goto proposed that children's school adjustment and academic performance should be tracked as next-stage outcomes — not just the economic indicators the paper currently covers.</li>
+              </ol>
+            </div>
+
+            <details class="context-card">
+              <summary class="context-card-label">Additional context</summary>
+              <h4>Why this research matters — evidence-based immigration policy in Korea</h4>
+              <p>Korean immigration policy debates have long been driven by political claims rather than empirical evidence. Lee's paper is among the first to provide rigorous causal estimates of a specific Korean policy change using Korean administrative data. It answers a question that has been debated for years — does stabilizing migrant status help the economy or threaten domestic workers — with actual numbers rather than assertions.</p>
+              <h4>The bigger picture</h4>
+              <p>The paper's message is not just "E-7-4 works." The larger implication is that Korea's immigration system is shifting from a <em>short-term, circular, individual</em> model toward a <em>long-term, settlement, family-based</em> one — and that shift appears economically sound. When E-7-4 expands and family accompaniment increases, the population of migrant-background children in Korean schools grows structurally. That's precisely the population that organizations working in integration and education need to prepare for.</p>
+              <div class="further-read">
+                <span class="further-read-label">Further reading</span>
+                <a href="https://sites.google.com/site/kwanlee84/" target="_blank" rel="noopener">Jongkwan Lee's homepage (Yonsei)</a> · <a href="https://www.immigration.go.kr/immigration/1503/subview.do" target="_blank" rel="noopener">MOJ E-7-4 visa guide</a> · <a href="https://kimanet.org/" target="_blank" rel="noopener">Korean Immigration Studies Association</a>
+              </div>
+            </details>
+            </div>
+          </div>
+          </div>
 
         <div class="tab-content" id="key-2b">
           <ol class="key-points">
@@ -2137,6 +2342,12 @@
         </div>
 
         <div class="tab-content active" id="sum-4a">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+          <div class="summary-kr">
           <div class="summary-text">
             <p class="lead">말라위 농촌의 젊은 여성들이 <strong>남편 가족 바깥의 친구·이웃 관계</strong>를 만들 수 있다면, 그 한 가지가 경제·심리적 복지를 얼마나 바꿀까?</p>
 
@@ -2205,7 +2416,57 @@
               </div>
             </details>
           </div>
-        </div>
+                  </div>
+          <div class="summary-en">
+            <div class="summary-text">
+            <p class="lead">The social isolation of young migrant women in rural Malawi is not a personality problem — it's a <strong>structural information problem</strong>. Remove the information barrier, and women build richer, more diverse connections. The downstream effects on food security and mental health follow.</p>
+
+            <p><strong>Gabriella Fleischman (Harvard Kennedy School)</strong> documents a striking baseline. Young women who have moved to their husband's village — the norm in rural Malawi — have on average only <strong>six people in their social networks</strong> four years after arrival. Just <strong>36%</strong> of those ties involve deep emotional trust. The majority cluster within the husband's extended family. Shared meals — Fleischman's measure of relationship depth — rarely cross into genuinely new friendships.</p>
+
+            <p>Why? Fleischman's diagnosis is <strong>information friction</strong> — even if a compatible potential friend lives nearby, neither woman knows enough about the other to take the first step. An additional layer: <em>economic distance</em> makes cross-income-tier connections especially unlikely, because the perceived cost of reciprocity creates an invisible barrier.</p>
+
+            <p>The experiment addresses the information friction directly. Women are shown names and photos of nearby women who have pre-agreed to receive an invitation to share a meal. Some see only higher-income neighbors; some only lower-income; some a mix. A meat voucher is cross-randomized to test price constraints. The result: <strong>81% of inviters send an invitation</strong>. One year later, network size doesn't grow much, but <em>composition</em> shifts — more own-chosen friendships, fewer husband's-family ties.</p>
+
+            <p>Two different relationship types produce two different benefits:</p>
+            <ul class="inline-list">
+              <li><strong>Food security improves</strong> when the new friend is higher-income (access to economic resources)</li>
+              <li><strong>Depression falls</strong> when the new friend is socioeconomically similar (social validation and emotional support)</li>
+            </ul>
+
+            <p>The implication: <strong>social isolation is an information-structural problem, not a character problem</strong>. Well-designed introductions — not exhortations to "be more social" — are what move the needle.</p>
+
+            <div class="term-note">
+              <span class="term-note-label">Connection point</span>
+              The insight maps directly to any community integration program: the binding constraint for migrant-background families connecting with locals is rarely willingness — it's the lack of structured opportunity to meet across difference. Mentoring and matching programs that deliberately bridge class and cultural lines are doing exactly what this experiment demonstrates works.
+            </div>
+
+            <div class="term-note is-discussant">
+              <span class="term-note-label">Discussant — Daniel Suryadarma (ADB)</span>
+              <p style="margin:0 0 10px 0;">Suryadarma organized barriers to friendship formation into three types: <strong>information</strong> (not knowing who to approach), <strong>emotional</strong> (fear of rejection), and <strong>maintenance</strong> (time and cost of sustaining the relationship). He raised three sharp methodological questions:</p>
+              <ol style="margin:0 0 0 20px;padding:0;font-size:14px;line-height:1.7;">
+                <li><strong>What drove invitation choices?</strong> — did inviters know the income status of the neighbor they chose? If not, what visual cues drove selection, and does that matter for interpretation?</li>
+                <li><strong>Enumerator effects</strong> — were participants influenced by the presence of the study team in ways that produced compliance rather than genuine preference? Distinguishing program-induced behavior from researcher-induced behavior is important.</li>
+                <li><strong>Why did inviters stop at 1.4 people when they could invite up to 5?</strong> — 72% said they wanted more social contact, yet actual invitations were sparse. The gap between stated demand and observed behavior needs explanation.</li>
+              </ol>
+              <p style="margin:12px 0 0 0;">Suryadarma also recommended collecting data from the <em>invited side</em> — how many meals did guests actually attend, and did relationships persist after the study period?</p>
+            </div>
+
+            <details class="context-card">
+              <summary class="context-card-label">Additional context</summary>
+              <h4>Why this research is distinctive — making "social capital" measurable</h4>
+              <p>Sociologists have argued since the 1990s that social capital shapes economic welfare. The challenge has always been measurement and manipulation. Fleischman solves both problems: <em>meal sharing</em> provides an observable, verifiable behavioral indicator of relationship depth, and the RCT design means the network formation itself is the experimental intervention. This is development economics and social science crossing into each other's territory productively.</p>
+              <ul>
+                <li><strong>Extending the Banerjee &amp; Duflo RCT tradition</strong> — demonstrating that "social interventions" (network formation) can be evaluated and scaled alongside economic interventions (cash transfers, training)</li>
+                <li><strong>The "meal sharing" measure</strong> — low-cost, high-validity, and portable across contexts including migration research in Korea and elsewhere</li>
+              </ul>
+              <div class="further-read">
+                <span class="further-read-label">Further reading</span>
+                <a href="https://gabriella-fleischman.github.io/" target="_blank" rel="noopener">Gabriella Fleischman's homepage</a> (Harvard Kennedy School) · Robert Putnam, <a href="https://www.simonandschuster.com/books/Bowling-Alone-Revised-and-Updated/Robert-D-Putnam/9781982130848" target="_blank" rel="noopener"><em>"Bowling Alone"</em></a> · <a href="https://www.povertyactionlab.org/" target="_blank" rel="noopener">J-PAL policy evaluation database</a>
+              </div>
+            </details>
+            </div>
+          </div>
+          </div>
 
         <div class="tab-content" id="key-4a">
           <ol class="key-points">
@@ -2315,6 +2576,12 @@
         </div>
 
         <div class="tab-content active" id="sum-4b">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+          <div class="summary-kr">
           <div class="summary-text">
             <p class="lead">같은 멘토링 프로그램이라도 <strong>"누구와 함께 듣느냐"</strong>에 따라 결과가 정반대로 나올 수 있다 — 정책 설계에 중요한 교훈입니다.</p>
 
@@ -2374,7 +2641,52 @@
               </div>
             </details>
           </div>
-        </div>
+                  </div>
+          <div class="summary-en">
+            <div class="summary-text">
+            <p class="lead">The same mentoring program produced <strong>opposite results depending on who else was in the room</strong>. Adding a local returnee to a migration mentoring session didn't improve migration outcomes — it shifted the conversation entirely, and households that stayed behind ended up better off than those that left.</p>
+
+            <p><strong>Cara Ebert (RWI Leibniz)</strong> runs a pre-registered RCT in rural Senegal targeting men aged 18–40 considering urban migration. The cultural backdrop is <em>sutura</em> — a Senegalese norm of discretion that makes people reluctant to share personal stories, including migration experiences. Successful migrants rarely debrief their families or neighbors, leaving aspiring migrants poorly informed.</p>
+
+            <p>The experiment has two treatment arms:</p>
+            <ul class="inline-list">
+              <li><strong>Mentoring only</strong> — a session with someone who has migrated and can share practical knowledge and advice</li>
+              <li><strong>Mentoring + local discussant</strong> — the same session, but with a community member who tried migration and returned also present</li>
+            </ul>
+
+            <p>The outcomes diverge sharply:</p>
+
+            <p><strong>Mentoring only</strong> — participants' knowledge about migration and job options clearly improved, and migration rates rose. But household-level economic welfare (income, assets) did not improve much overall.</p>
+
+            <p><strong>Mentoring + local discussant</strong> — migration rates barely changed, but households that stayed behind showed <strong>significant gains</strong>: non-farm self-employment grew, inter-household transfers increased, assets accumulated, and food insecurity fell.</p>
+
+            <p>The mechanism appears to be conversational direction. When a returnee joins the session, discussion naturally shifts from "how to migrate" to "what opportunities exist here." The information environment changes — not just its content, but its <em>orientation</em>.</p>
+
+            <p>The core message is two-fold: <strong>(1)</strong> program effects are not properties of the program alone — the social composition of the delivery setting can completely reverse outcomes. <strong>(2)</strong> Migration support is not always the right answer — for some people, better local information about local opportunities may be more valuable than migration guidance.</p>
+
+            <div class="term-note">
+              <span class="term-note-label">Connection point</span>
+              For mentoring programs supporting migrant-background youth, the question "mentor + mentee one-on-one" versus "mentor + mentee + peer group" is not merely structural — it can produce fundamentally different outcomes. Ebert's experiment shows the social context of information delivery shapes what information people actually take away.
+            </div>
+
+            <div class="term-note is-discussant">
+              <span class="term-note-label">Discussant — Lauren Gilbert (GeoQuant)</span>
+              <p style="margin:0 0 10px 0;">Gilbert reframed the finding: <em>"The real intervention here is not information but the social composition of the setting."</em> Her practical question was whether observable village characteristics — density of the migration network, strength of sutura norms — could predict in advance which treatment arm would be more effective, making evidence-based scale-up feasible rather than requiring community-by-community experiments.</p>
+            </div>
+
+            <details class="context-card">
+              <summary class="context-card-label">Additional context</summary>
+              <h4>Why this research is valuable — the "counter-intuitive result" in development</h4>
+              <p>The most policy-useful findings in development economics are often the ones that contradict expectations. Ebert's was exactly such a case: the hypothesis was that adding a returned migrant would improve migration outcomes; the data showed the opposite. This kind of "unexpected reversal" reveals something deeper — <strong>context effects</strong> that pure information-delivery models miss entirely.</p>
+              <p>The study sits in the tradition of Mushfiq Mobarak's Bangladesh seasonal migration subsidy experiments — which also found that a single small intervention (a bus ticket subsidy) reshaped village-level economies in ways that went far beyond the original target. Ebert extends that insight to <em>soft interventions</em> like mentoring.</p>
+              <div class="further-read">
+                <span class="further-read-label">Further reading</span>
+                <a href="https://www.rwi-essen.de/en/cara-ebert" target="_blank" rel="noopener">Cara Ebert's profile (RWI Leibniz)</a> · Bryan, Chowdhury &amp; Mobarak, <a href="https://onlinelibrary.wiley.com/doi/10.3982/ECTA10489" target="_blank" rel="noopener"><em>"Underinvestment in a Profitable Technology"</em></a> (Econometrica 2014) · <a href="https://www.povertyactionlab.org/evaluations" target="_blank" rel="noopener">J-PAL evaluation database</a>
+              </div>
+            </details>
+            </div>
+          </div>
+          </div>
 
         <div class="tab-content" id="key-4b">
           <ol class="key-points">
@@ -2449,6 +2761,12 @@
         </div>
 
         <div class="tab-content active" id="sum-4c">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+          <div class="summary-kr">
           <div class="summary-text">
             <p class="lead">스페인 경제위기가 <strong>지구 반대편 에콰도르의 시골 마을 경제</strong>까지 어떻게 흔들었을까 — 이주 네트워크를 타고 퍼진 충격의 지도.</p>
 
@@ -2515,7 +2833,48 @@
               </div>
             </details>
           </div>
-        </div>
+                  </div>
+          <div class="summary-en">
+            <div class="summary-text">
+            <p class="lead">Migration networks aren't one-directional. The same corridors that carry people from poor to rich countries during booms <strong>carry economic shocks back in the other direction</strong> when the boom collapses. Ecuador's rural provinces felt Spain's financial crisis through exactly this mechanism.</p>
+
+            <p><strong>Joseph Melkonian (Harvard Kennedy School)</strong> traces the transmission of the 2008–2012 Spanish economic crisis back to Ecuador through the migration corridor that had grown explosively in the 2000s. Between 1985 and 2005, the number of Ecuadorians in Spain grew tenfold, reaching roughly <strong>500,000 people — about 3% of Ecuador's total population</strong>, concentrated in Spain's construction sector. Three forces drove the growth: Ecuador's 1999 economic crisis, Spain's housing boom, and shared language combined with relatively permissive migration policy.</p>
+
+            <p>Then the 2008 financial crisis hit Spain. Construction employment collapsed — the overall employment rate fell <strong>from 80% to 50% in four years</strong>. Remittances — which had reached <strong>3% of Ecuador's GDP</strong> — contracted sharply.</p>
+
+            <p>Melkonian's identification strategy is elegant. He maps which Ecuadorian provinces sent migrants to which Spanish provinces, then uses the construction bust intensity in each Spanish province as an instrument for shocks in the corresponding Ecuadorian home provinces. The main channel of shock transmission: <strong>return migration</strong>. Ecuadorians losing jobs in Spain came back, adding labor supply to home provinces and depressing wages and employment there.</p>
+
+            <p>An additional finding: Spain's voluntary return program — which offered lump-sum social security payments to encourage migrants to leave — actually worked. Eligible migrants who took the offer left at higher rates, accelerating the return flow. The policy achieved its stated goal.</p>
+
+            <p>The policy message: <strong>migration corridors are two-way highways</strong>. Governments on the sending side should monitor economic conditions in destination countries as potential risk factors for their own local labor markets — because a bust there becomes a surplus here.</p>
+
+            <div class="term-note">
+              <span class="term-note-label">Korea relevance</span>
+              The same logic applies to Korea's labor corridors with the Philippines, Vietnam, Nepal, and Indonesia. A slowdown in Korean construction, agriculture, or manufacturing would trigger return flows that arrive back in specific source regions — not uniformly distributed across sending countries. The sub-national geography of migration matters for both risk assessment and contingency planning.
+            </div>
+
+            <div class="term-note is-discussant">
+              <span class="term-note-label">Discussant — Hyejin Kim (Pukyong National University)</span>
+              <p style="margin:0 0 10px 0;">Kim raised two extensions worth pursuing:</p>
+              <ol style="margin:0 0 0 20px;padding:0;font-size:14px;line-height:1.7;">
+                <li><strong>Non-remittance channels</strong> — return migrants bring more than reduced income; they also bring the psychological damage of failed migration, shifted family roles, and disruption to local social hierarchies. The welfare effect of return migration goes beyond what remittance data captures.</li>
+                <li><strong>Long-run recovery</strong> — do shock-affected provinces ever fully return to pre-crisis levels, or do they settle at a new lower equilibrium? The paper estimates the impact during the crisis period; longer-run tracking would reveal whether the damage is temporary or permanent. The same framework could be applied to Korean-Southeast Asian corridors.</li>
+              </ol>
+            </div>
+
+            <details class="context-card">
+              <summary class="context-card-label">Additional context</summary>
+              <h4>Why this research matters — sub-national migration corridor analysis</h4>
+              <p>Most migration economics research focuses on the destination country. Melkonian's contribution is reversing the direction of analysis — showing that <strong>economic crises in receiving countries transmit back to sending communities through the same networks that enabled migration in the first place</strong>. The sub-national approach (province-to-province rather than country-to-country) is analytically important because aggregate-level data would miss the geographic concentration of both migration flows and shock transmission.</p>
+              <p>This is one of only a handful of papers globally to map sub-national migration corridor effects in this direction. The Spanish return migration program finding is particularly policy-relevant given ongoing debates in Korea and elsewhere about voluntary return incentive programs for undocumented migrants.</p>
+              <div class="further-read">
+                <span class="further-read-label">Further reading</span>
+                <a href="https://www.hks.harvard.edu/centers/cid/about-cid/people/phd-affiliates/joseph-melkonian" target="_blank" rel="noopener">Joseph Melkonian's profile</a> (Harvard Kennedy School) · Hein de Haas, <a href="https://www.penguin.co.uk/books/455478/how-migration-really-works-by-haas-hein-de/9780241998779" target="_blank" rel="noopener"><em>"How Migration Really Works"</em></a> (2023) · <a href="https://worldmigrationreport.iom.int/" target="_blank" rel="noopener">IOM World Migration Report</a>
+              </div>
+            </details>
+            </div>
+          </div>
+          </div>
 
         <div class="tab-content" id="key-4c">
           <ol class="key-points">
@@ -2620,6 +2979,12 @@
       </div>
 
       <div class="tab-content active" id="sum-5">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+        <div class="summary-kr">
         <div class="summary-text">
           <p class="lead">합법 이주 경로가 실제로 열리면, <strong>저학력 노동자와 그 가족의 삶은 어떻게 달라질까요?</strong></p>
 
@@ -2678,7 +3043,47 @@
             </div>
           </div>
         </div>
-      </div>
+              </div>
+        <div class="summary-en">
+          <div class="summary-text">
+          <p class="lead">A legal work visa quadrupled the incomes of low-education Mexican workers, cut household poverty by <strong>9 percentage points</strong>, and — contrary to the standard policy worry — did not fuel unauthorized immigration.</p>
+
+          <p><strong>Melanie Morten (Stanford)</strong> presents what may be the cleanest causal evidence on legal migration returns ever produced. The <em>H-2A agricultural visa program</em> — <strong>300,000 visas annually</strong>, 91% to Mexican nationals — uses a lottery-like allocation that Morten exploits as an RCT. Workers randomly offered visa priority through an NGO recruitment process are compared to workers who received no visa through this channel. Compliance is near-perfect: <strong>91% of those offered a visa migrated</strong>.</p>
+
+          <p>The income effect is large. Workers not offered a visa earned roughly <strong>$600/month in Mexico</strong>. Workers who received a visa earned <strong>$2,400/month in the US</strong> over an average seven-month season. They remitted approximately <strong>70% of income</strong> — far above the 40% typical in other migration programs, driven by H-2A's employer-paid housing and transportation eliminating personal expenses. The remitted income produced measurable gains for families at home:</p>
+
+          <ul class="inline-list">
+            <li><strong>Poverty rate fell by 9 percentage points</strong></li>
+            <li><strong>Savings increased, debt fell</strong></li>
+            <li><strong>Housing investment grew</strong> ("On the first migration, people fix the house.")</li>
+          </ul>
+
+          <p>Two policy findings are particularly notable. First, expanded legal access did <strong>not</strong> increase unauthorized immigration — a direct empirical challenge to the standard concern. If anything, one legal migrant in a household increased legal migration by other family members. Second, H-2A workers fill agricultural slots that domestic workers decline — they are complements to, not substitutes for, domestic labor.</p>
+
+          <p>The Korea parallel: the EPS (E-9 visa) operates on similar principles at smaller scale. Morten's findings provide a benchmark for what well-functioning seasonal work programs can achieve for migrants and their families — and what Korea's mandatory departure requirement forecloses by preventing the same person from returning year after year.</p>
+
+          <div class="term-note">
+            <span class="term-note-label">Note on the RCT design</span>
+            <strong>Why this study is unusually credible</strong> — immigration research typically cannot randomly assign who receives a visa, making it hard to separate selection from program effects. H-2A's lottery-like allocation through the NGO created a rare natural experiment. With 91% of the treatment group actually migrating, the causal estimate is clean in a way that almost no other immigration study achieves.
+          </div>
+
+          <div class="context-card">
+            <div class="context-card-label">Additional context</div>
+            <h4>Morten and the J-PAL migration research agenda</h4>
+            <p>Morten is a Stanford economics professor and co-director of J-PAL's labor and migration program. Her work combines theoretical rigor with large-scale field experiments, and she is one of the few researchers to have produced RCT-grade evidence on legal migration returns. Her earlier paper <em>"Temporary Migration and Endogenous Risk Sharing"</em> (JPE) showed how seasonal migration in India serves as household insurance. This H-2A study is the culmination of a multi-year partnership with a Mexican NGO.</p>
+            <h4>Common objections and what this study says</h4>
+            <ul>
+              <li><em>"Expanding legal pathways increases undocumented immigration"</em> → This study finds the <strong>opposite</strong>: family members of legal migrants were more likely to come legally, not illegally.</li>
+              <li><em>"Migrants take domestic workers' jobs"</em> → H-2A workers fill agricultural positions domestic workers don't take — they are <em>complements</em>, not substitutes.</li>
+            </ul>
+            <div class="further-read">
+              <span class="further-read-label">Further reading</span>
+              <a href="https://web.stanford.edu/~memorten/Melanie_Morten.html" target="_blank" rel="noopener">Melanie Morten's homepage</a> · <a href="https://kingcenter.stanford.edu/our-work/research-initiatives/guestworker-migration/h2-research-project" target="_blank" rel="noopener">Stanford King Center H-2A project page</a> · Michael Clemens, <a href="https://www.cgdev.org/publication/does-development-reduce-migration-working-paper-359" target="_blank" rel="noopener"><em>"Does Development Reduce Migration?"</em></a> (CGD WP)
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
 
       <div class="tab-content" id="key-5">
         <ol class="key-points">
@@ -2910,6 +3315,12 @@
       </div>
 
       <div class="tab-content active" id="sum-6">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+        <div class="summary-kr">
         <div class="summary-text">
           <p class="lead"><strong>"한국은 이민 없이 노동력 부족을 풀 수 없다."</strong> 이 진단에서 세 발표자가 서로 다른 각도로 해법을 내놓은 정책 라운드테이블입니다.</p>
 
@@ -2970,7 +3381,47 @@
             </div>
           </details>
         </div>
-      </div>
+              </div>
+        <div class="summary-en">
+          <div class="summary-text">
+          <p class="lead"><strong>"South Korea has moved past asking whether to accept immigration. The question now is how to manage it better."</strong> Four voices — an economist, a central bank researcher, a global development scholar, and a government official — worked through that question from different angles.</p>
+
+          <p><strong>Jongkwan Lee (Yonsei)</strong> laid out the structural problem: Korea's Employment Permit System produces chronic churn — firms train workers, then lose them to mandatory departure. His proposals: expand E-7-4 to stabilize tenure, allow family accompaniment, and pilot regionally targeted visas to address local shortages. His sharper message: <em>"Integration cannot succeed through immigrant effort alone. Employers and communities must be prepared to receive people."</em></p>
+
+          <p><strong>Dongkyu Seo (Bank of Korea)</strong> added the AI dimension. Automation will likely displace routine low-skill work first — but that's precisely where Korea's current migrant intake is concentrated. His caution: don't build today's immigration system around tomorrow's redundant job categories. Steer migrants toward care work, personal services, and manual tasks that AI cannot automate. Otherwise, today's labor solution becomes tomorrow's social vulnerability — the workers most recently arrived will face the most exposure to automation-driven job loss.</p>
+
+          <p><strong>Mushfiq Mobarak (Yale/Y-RISE)</strong> contrasted two Asian models. The <em>Bangladesh–Malaysia</em> corridor, dominated by private brokers, saddled workers with recruitment fees several times their annual income — NGO intervention that eliminated those fees produced substantial welfare gains. The <em>Philippines–Japan</em> channel, by contrast, features government-set language and skills standards, direct placement into mainstream Tokyo and Osaka employment, and genuine social integration rather than dormitory segregation. The lesson: <strong>receiving countries that set standards and enforce them produce better outcomes for everyone.</strong></p>
+
+          <p><strong>Jaehyeong Lee (Ministry of Justice)</strong> confirmed that the policy direction has already shifted. Korea is now designing, not debating. Key operational priorities: language and vocational training with clear public-private boundaries; continued integration support after arrival; and optimizing investment in Korea-specific human capital.</p>
+
+          <p><strong>Key debates from the Q&amp;A:</strong></p>
+          <ul class="inline-list">
+            <li><strong>The Busan question</strong> — "Why should migrants go to Busan if conditions are worse than Seoul?" Mobarak's response: <em>"Busan may be worse than Seoul, but it's far better than Manila, Dhaka, or Jakarta. Good policy design can create outcomes that benefit all three parties — Korea, sending countries, and migrants."</em></li>
+            <li><strong>Wage differential ethics</strong> — Should migrants be paid less for the same work? The principle is equal pay for equal work; the reality is comparative advantage. Policy must find the line between fair labor standards and economic realism.</li>
+            <li><strong>AI × low-skill risk</strong> — If AI automates low-skill jobs first, should Korea be recruiting low-skill migrants now? Seo: the workers most exposed to automation risk are exactly those in today's low-skill intake. Redirect toward automation-resistant sectors.</li>
+          </ul>
+
+          <p>Chair Neela Saldanha's closing line captured the session: <em>"We actually know less than we think. Some people say what they don't know with great confidence."</em> The call was for evidence-based humility and international learning rather than policy certainty.</p>
+
+          <div class="term-note">
+            <span class="term-note-label">Key terms</span>
+            <strong>Employment Permit System (EPS)</strong> — Korea's framework for non-professional foreign workers, operating since 2004 through G2G agreements with 16 Asian countries. Workers can stay up to 4 years and 10 months before mandatory departure. Family accompaniment not permitted. <strong>E-7-4 skilled worker visa</strong> — introduced 2017 as a conversion pathway for EPS workers meeting tenure, language, and skill thresholds. Allows long-term stay and family accompaniment. Central to Korea's emerging integration-oriented policy direction.
+          </div>
+
+          <details class="context-card">
+            <summary class="context-card-label">Additional context</summary>
+            <h4>Why this roundtable matters</h4>
+            <p>This session was rare: it brought academics, a central bank economist, a leading global development researcher, and the top immigration official at Korea's Ministry of Justice into the same room to discuss a common policy agenda. The combination matters because Korea is at precisely the inflection point where "should we?" debates are giving way to "how exactly?" design work. The roundtable documented that consensus in real time.</p>
+            <h4>The "Philippines–Japan model" that Mobarak praised</h4>
+            <p>Japan's government-set language and skills standards for Filipino hospitality workers represent the opposite of the broker-dominated, fee-laden systems that dominate much of Southeast Asian migration. Workers are placed in mainstream employment in Tokyo, Osaka, and Hokkaido — integrated into communities rather than housed in isolated dormitories. Mobarak described this as the benchmark that Korean policy reformers should be studying as they consider alternatives to the current EPS structure.</p>
+            <div class="further-read">
+              <span class="further-read-label">Further reading</span>
+              <a href="https://sites.google.com/site/kwanlee84/" target="_blank" rel="noopener">Jongkwan Lee's homepage</a> · <a href="https://yrise.yale.edu/" target="_blank" rel="noopener">Y-RISE (Yale)</a> Asian migration research · <a href="https://www.bok.or.kr/portal/bbs/P0002454/list.do?menuNo=200431" target="_blank" rel="noopener">Bank of Korea Economic Research Institute</a> population and labor supply reports
+            </div>
+          </details>
+          </div>
+        </div>
+        </div>
 
       <div class="tab-content" id="key-6">
         <ol class="key-points">
@@ -3103,6 +3554,12 @@
       </div>
 
       <div class="tab-content active" id="sum-7">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+        <div class="summary-kr">
         <div class="summary-text">
           <p class="lead"><strong>이주민이 경제적으로는 잘 해내는데, 왜 이주 정치는 점점 더 적대적이 되어갈까요?</strong></p>
 
@@ -3170,7 +3627,40 @@
             </div>
           </div>
         </div>
-      </div>
+              </div>
+        <div class="summary-en">
+          <div class="summary-text">
+          <p class="lead">Immigrants' children are climbing the economic ladder at <strong>the same rate as a century ago</strong>. So why is anti-immigrant politics more intense than it has been in decades? Ran Abramitzky tackles both questions with data — and finds that Trump is a statistical outlier, not a historical trend.</p>
+
+          <p>Drawing on his book <em>Streets of Gold</em> (with Leah Boustan) and new cross-national research, <strong>Ran Abramitzky (Stanford)</strong> links historical census records across generations to trace immigrant children's economic trajectories in the US over 150 years. The headline finding: <strong>the American Dream still works for the second generation</strong>. Children of immigrants — from Latin America, Asia, and beyond — reach higher income percentiles faster than comparable US-born children. Asian-origin children reach on average the 60th–70th income percentile; Latin American children exceed the 53rd percentile.</p>
+
+          <p>Three factors explain the pattern: (1) <strong>Geography as destiny</strong> — immigrants sort into high-opportunity cities (New York, California), while native-born low-income families often remain in stagnant regions. Control for location, and much of the gap disappears. (2) <strong>Starting lower means more room to rise</strong> — immigrant parents begin at artificially depressed income levels due to language and credential barriers; their children start without those constraints. (3) <strong>Self-selection</strong> — people who cross borders tend to be more driven and adaptable than average, and they transmit those expectations.</p>
+
+          <p>Expanding to <strong>15 countries with 40 co-authors</strong>, Abramitzky finds a striking gender asymmetry. <em>Daughters</em> succeed nearly everywhere. <em>Sons</em> succeed in "Anglosphere" countries (US, UK, Canada, Israel, Italy) — but fall behind in continental Europe. The key difference: <strong>education systems with early academic tracking</strong> (Germany, Austria, Denmark, Sweden) lock immigrant boys into disadvantaged tracks early. Open, non-tracked systems let them catch up.</p>
+
+          <p>On the political side, Abramitzky applies large language models to classify congressional and parliamentary speeches across the US and eight European countries since the 1880s. The result: <strong>Trump's anti-immigration score is a statistical extreme</strong> — roughly −50 on a friendliness index where every other US president of the past 60 years scores around +50. European politics shifted sharply after the 2015 Syrian refugee crisis, when center-right parties moved anti-immigration. But the trajectory is not a steady march toward hostility — it's punctuated and contingent.</p>
+
+          <p>Two conclusions: <strong>(1)</strong> The American Dream is alive but conditional — it requires an open, non-tracking educational system. <strong>(2)</strong> Anti-immigrant political rhetoric is not driven by immigrants' actual performance — it's driven by structural changes in discourse, and Trump is an individual extreme, not a harbinger of irreversible historical change.</p>
+
+          <div class="term-note">
+            <span class="term-note-label">On "Streets of Gold"</span>
+            The 2022 book by Abramitzky and Boustan overturned three persistent myths about American immigration: that past immigrants assimilated faster than today's (they didn't — both took about a generation); that first-generation immigrants succeed economically (most don't — the dream is realized in the second generation); and that children of poor origin immigrants can't succeed (they can — and often outpace US-born peers from similar backgrounds).
+          </div>
+
+          <div class="context-card">
+            <div class="context-card-label">Additional context</div>
+            <h4>The "Anglosphere effect" and what it means for Korea</h4>
+            <p>Abramitzky's finding that immigrant sons succeed in open-track education systems but fall behind in early-tracking systems is a direct warning for Korea. Korean education effectively sorts children from an early age — through the private tutoring economy, test-based high school selection, and university entrance competition. Migrant-background boys in this environment face the same structural disadvantages that immigrant boys face in Germany or Austria. This is the economic case for educational intervention programs targeting migrant-background youth specifically.</p>
+            <h4>The LLM political discourse analysis</h4>
+            <p>Using BERT and ChatGPT to classify pro- and anti-immigrant content in legislative speech is methodologically innovative. The finding that Trump's score (−50) sits at the extreme of the full 150-year distribution, rather than representing a secular trend, is an important corrective to narratives that treat current anti-immigrant politics as inevitable. Abramitzky's data suggest it's a deviation, not a new equilibrium.</p>
+            <div class="further-read">
+              <span class="further-read-label">Further reading</span>
+              <a href="https://ranabr.people.stanford.edu/" target="_blank" rel="noopener">Ran Abramitzky's homepage</a> · <a href="https://www.publicaffairsbooks.com/titles/ran-abramitzky/streets-of-gold/9781541797833/" target="_blank" rel="noopener"><em>"Streets of Gold"</em></a> (2022, PublicAffairs) · <a href="https://ranabr.people.stanford.edu/research" target="_blank" rel="noopener">Abramitzky &amp; Boustan research series</a>
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
 
       <div class="tab-content" id="key-7">
         <ol class="key-points">
@@ -3448,6 +3938,12 @@
         </div>
 
         <div class="tab-content active" id="sum-7a2">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+          <div class="summary-kr">
           <div class="summary-text">
             <p class="lead"><strong>"파일럿(pilot · 소규모 시범 실험)에선 잘 됐는데 규모를 키우니 왜 효과가 사라질까?"</strong> — 정책 현장에서 반복되는 이 수수께끼를 방글라데시 이주 대출 실험으로 뜯어본 연구.</p>
 
@@ -3531,7 +4027,60 @@
               </div>
             </div>
           </div>
-        </div>
+                  </div>
+          <div class="summary-en">
+            <div class="summary-text">
+            <p class="lead">A program that delivered 25–40 percentage point increases in seasonal migration in small pilots fell to nearly <strong>zero effect when expanded fivefold</strong>. The money was distributed as planned. The failure wasn't financial — it was about <em>who received the money</em>.</p>
+
+            <p><strong>Ashish Shenoy (UC Davis/Y-RISE)</strong> examines what happened when Mobarak's celebrated Bangladesh seasonal migration loan program — cited for a decade as one of the most cost-effective development interventions documented — was scaled from tightly controlled experiments to a regional microfinance partnership serving <strong>150,000 households annually (5% of the local population)</strong>.</p>
+
+            <p>Shenoy classifies loan recipients into three types:</p>
+            <ol style="margin:6px 0 14px 20px;padding:0;line-height:1.8;">
+              <li><strong>Opportunistic movers</strong> — they would have migrated with or without the loan. The loan is pure windfall. No new migration created.</li>
+              <li><strong>Induced movers</strong> — they migrate <em>because</em> of the loan. This is the program's intended beneficiary. <em>All</em> the migration effect comes from reaching this group.</li>
+              <li><strong>Non-movers</strong> — they will not migrate regardless. The loan is misappropriated or rejected.</li>
+            </ol>
+
+            <p><strong>What went wrong in 2017:</strong> field staff with loan distribution quotas took the path of least resistance — they found <em>opportunistic movers</em> first, who were easy to identify and required little persuasion. Quota met. Effect: nearly zero, because the right people weren't reached.</p>
+
+            <p><strong>What went wrong in 2018:</strong> instructions were changed to target constrained households. But a new problem emerged: <em>non-movers</em> (who will never migrate) tend to signal interest quickly when offered cash. <em>Induced movers</em> deliberate, taking time to weigh whether migration is right for them. Staff couldn't wait — loans flowed to whoever signaled first. The estimated effect of this wrong-recipient allocation: an additional 15–17 percentage point reduction in program impact.</p>
+
+            <p>Three lessons Shenoy draws:</p>
+            <ul style="margin:6px 0 14px 20px;padding:0;line-height:1.8;">
+              <li><strong>The binding constraint in scale-up is not money but implementer capacity</strong> — specifically, the time and relationships needed to identify the right people. Designing scale-up means designing around this bottleneck.</li>
+              <li><strong>Evaluation cannot be fully separated from implementation</strong> — in the pilot, enumerators implicitly served as program ambassadors. That invisible role inflated the pilot's effectiveness in ways that don't scale.</li>
+              <li><strong>Pilots should include "scalability prediction" instruments from the start</strong> — measuring which recipient types get screened out as program intensity decreases, so scale-up feasibility can be forecast rather than discovered after the fact.</li>
+            </ul>
+
+            <div class="term-note">
+              <span class="term-note-label">Key concept — delegation risk</span>
+              <strong>Principal-agent problems in program delivery.</strong> When the person who designs a program (the principal) delegates delivery to field staff (agents) whose incentives and information differ, implementation drifts away from design intent. Shenoy's case is unusual because all parties <em>shared</em> the goal — and the problem still emerged. The bottleneck was not misaligned incentives but overwhelmed capacity.
+            </div>
+
+            <div class="term-note is-discussant">
+              <span class="term-note-label">Discussant — Ben Hyman (Malengo)</span>
+              <p style="margin:0 0 10px 0;">Hyman pushed back on the "implementation failure" framing with four alternative explanations worth testing:</p>
+              <ol style="margin:0 0 0 20px;padding:0;font-size:14px;line-height:1.7;">
+                <li><strong>Geographic differences</strong> — scale-up regions differed from pilot regions in ways beyond distance (living costs, labor markets, social networks)</li>
+                <li><strong>Macro/climate shifts</strong> — per-capita caloric intake rose 25% and GDP grew 75% between the original pilots and the scale-up; the 2017–18 seasons had better rainfall than 2008. The original problem (hunger-driven migration pressure) may have eased.</li>
+                <li><strong>Mobile money substitution</strong> — smartphone penetration exploded in this period, making information about migration and remittance options far more accessible. The program's "information + credit" bundle may have been partially replaced by market alternatives.</li>
+                <li><strong>Best-buy programs fade</strong> — interventions that work because they address a very specific binding constraint (an $8 loan blocking migration for constrained households) naturally lose effect as the broader context evolves. Dramatic pilot effects often reflect a unique historical moment, not a portable technology.</li>
+              </ol>
+            </div>
+
+            <details class="context-card">
+              <summary class="context-card-label">Additional context</summary>
+              <h4>Why this research matters — opening the scale-up black box</h4>
+              <p>The "scaling problem" in development economics — pilot results that don't replicate at scale — has been known for years but poorly understood mechanically. Shenoy's contribution is <strong>quantifying the specific pathway</strong>: wrong-recipient allocation, driven by implementer capacity constraints, accounts for most of the effect loss. This transforms the problem from a mystery into a design challenge with tractable solutions.</p>
+              <p>The finding generalizes immediately: job training programs that attract already-motivated participants, scholarships that go to students who would have attended college regardless, entrepreneurship grants taken by people who would have started businesses anyway. In all these cases, the gap between pilot and scale is not about the intervention's validity — it's about whether the right people are being reached.</p>
+              <div class="further-read">
+                <span class="further-read-label">Further reading</span>
+                <a href="https://yrise.yale.edu/" target="_blank" rel="noopener">Y-RISE (Yale Research Initiative on Innovation &amp; Scale)</a> · Shenoy's working papers available on his UC Davis homepage · Bryan, Chowdhury &amp; Mobarak, <a href="https://onlinelibrary.wiley.com/doi/10.3982/ECTA10489" target="_blank" rel="noopener"><em>"Underinvestment in a Profitable Technology"</em></a> (Econometrica 2014) — the original Bangladesh pilot
+              </div>
+            </details>
+            </div>
+          </div>
+          </div>
 
         <div class="tab-content" id="key-7a2">
           <ol class="key-points">
@@ -3767,6 +4316,12 @@
         </div>
 
         <div class="tab-content active" id="sum-7b">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+          <div class="summary-kr">
           <div class="summary-text">
             <p class="lead">가난한 나라에 이주민이 갑자기 몰려오면 — <strong>"슬럼"이 그 충격을 조용히 흡수해냅니다.</strong> 철거가 답이 아닐 수 있다는 반전의 연구.</p>
 
@@ -3861,7 +4416,58 @@
               </div>
             </div>
           </div>
-        </div>
+                  </div>
+          <div class="summary-en">
+            <div class="summary-text">
+            <p class="lead">When 2.5 million Venezuelans arrived in Colombia in four years, formal housing markets responded slowly and partially. <strong>Informal settlements absorbed much of the shock.</strong> Blocking that absorption, a counterfactual simulation finds, would have turned a welfare gain for low-skill workers into a significant loss.</p>
+
+            <p><strong>Marco Gonzalez-Navarro (UC Berkeley)</strong> studies the housing market response to one of the largest and fastest migration shocks in recent history. Between 2016 and 2020, Venezuela's economic collapse — a 60% contraction over six years — sent <strong>2.5 million people across the Colombian border, equal to 6% of Colombia's population</strong>.</p>
+
+            <p>The core question: how did the housing stock adjust?</p>
+
+            <p><strong>First finding — formal housing supply responded, but not enough.</strong> Approximately <strong>150 formal housing units were constructed per 1,000 incoming migrants</strong> over a decade. To house the inflow at average household size requires 250 units per 1,000 migrants. Formal supply fell significantly short.</p>
+
+            <p><strong>Second finding — slums absorbed the gap.</strong> Informal settlement populations expanded at roughly <strong>40–60%</strong> of the migrant inflow rate. The cities' urban periphery grew as new arrivals built improvised housing on unoccupied land.</p>
+
+            <p>Terrain variation helps identify the mechanism: in topographically difficult areas where construction is more expensive, formal supply responses were weaker — and slum expansion was correspondingly larger. When formal supply is constrained, informal housing compensates.</p>
+
+            <p><strong>The most striking result is the counterfactual simulation:</strong></p>
+            <ul class="inline-list">
+              <li><strong>Actual outcome (slums allowed to expand)</strong>: low-skill worker welfare <strong>+7%</strong></li>
+              <li><strong>If slum expansion had been prohibited</strong>: welfare <strong>−8%</strong> — housing cost increases would have fully consumed the wage gains from migration-driven economic activity</li>
+              <li><strong>If existing slums had been demolished</strong>: similar severe welfare decline</li>
+            </ul>
+
+            <p>The reason is simple: <strong>low-income workers calculate their welfare on wages minus housing costs</strong>. If wages rise but housing costs rise faster, real welfare falls. Slums provide affordable housing that prevents this from happening. The policy implication: <strong>"slum clearance" may sound humane but can devastate the very people it claims to help</strong>. The real priority is increasing formal housing supply elasticity — enabling the market to build affordable units quickly when demand surges.</p>
+
+            <div class="term-note">
+              <span class="term-note-label">Key terms</span>
+              <strong>Housing supply elasticity</strong> — how quickly construction responds to price increases. High elasticity (Texas, US): supply expands fast, prices stay stable. Low elasticity (Seoul, Hong Kong): supply is constrained by land and regulation, so the same demand shock produces price spikes. <strong>Counterfactual simulation</strong> — comparing the observed world to a modeled alternative ("what if slums had been banned?") to quantify the value of the informal sector.
+            </div>
+
+            <div class="term-note is-discussant">
+              <span class="term-note-label">Discussant — Hyunjoo Yang (Sogang University)</span>
+              <p style="margin:0 0 10px 0;">Yang raised three important concerns:</p>
+              <ol style="margin:0 0 0 20px;padding:0;font-size:14px;line-height:1.7;">
+                <li><strong>Absorption limits</strong> — the 5% shock was large but not extreme. Whether slums can continue absorbing as the inflow reaches 10–15% remains untested.</li>
+                <li><strong>Long-run human capital cost</strong> — slums lower housing costs short-term, but children raised in informal settlements may face lasting deficits in health, education, and opportunity. The short-term welfare gain may mask long-term social losses.</li>
+                <li><strong>The Korea parallel</strong> — Korea has no slums in the Colombian sense, but <em>basement apartments, gosiwon, and jjokbangchon</em> may be playing the same absorptive role: providing low-cost housing that prevents price spikes when low-income workers concentrate in cities. Policies that remove these options without providing alternatives may harm the poorest residents most.</li>
+              </ol>
+            </div>
+
+            <div class="context-card">
+              <div class="context-card-label">Additional context</div>
+              <h4>Why this research challenges conventional wisdom</h4>
+              <p>International development organizations have long treated slums as targets for elimination — "Cities without slums" has been a UN Habitat goal for decades. Gonzalez-Navarro's empirical finding inverts this logic: <strong>slums are functioning parts of the urban housing market that protect low-income workers from price shocks</strong>. Eliminating them without first ensuring adequate formal housing supply causes harm. This is a policy-relevant finding that has begun influencing World Bank and IDB housing strategy.</p>
+              <p>Gonzalez-Navarro is a leading figure in urban and development economics at UC Berkeley, known for rigorous impact evaluation of infrastructure programs in Mexico and beyond. This paper extends his long-term agenda on how urban infrastructure mediates economic inequality.</p>
+              <div class="further-read">
+                <span class="further-read-label">Further reading</span>
+                World Bank Urban Development reports · IDB Housing Policy research · The foundational academic literature on housing supply elasticity: Saiz (2010) on US cities · Hein de Haas, <a href="https://www.penguin.co.uk/books/455478/how-migration-really-works-by-haas-hein-de/9780241998779" target="_blank" rel="noopener"><em>"How Migration Really Works"</em></a> (2023)
+              </div>
+            </div>
+            </div>
+          </div>
+          </div>
 
         <div class="tab-content" id="key-7b">
           <ol class="key-points">
@@ -4014,6 +4620,12 @@
         </div>
 
         <div class="tab-content active" id="sum-8a">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+          <div class="summary-kr">
           <div class="summary-text">
             <p>이주 경제학에는 오래된 수수께끼가 있다 — <strong>이주민이 들어오면 내국인 임금이 떨어질 것 같은데, 실제 연구 대부분은 임금 효과가 0 근처</strong>로 측정된다. 왜 그럴까?</p>
             <p>코넬대의 <strong>Leonardo Peñaloza-Pacheco</strong>의 답은 이렇다 — 이주는 <em>하나의 충격</em>이 아니라 <em>세 개의 동시 충격</em>이기 때문에, 서로 반대 방향으로 작용해 상쇄되는 것처럼 보인다는 것.</p>
@@ -4083,7 +4695,43 @@
               </div>
             </div>
           </div>
-        </div>
+                  </div>
+          <div class="summary-en">
+            <div class="summary-text">
+            <p>Immigration research has long struggled to explain an inconvenient fact: <strong>large labor supply shocks from immigration barely move wages</strong> in the data, even though basic economics predicts they should. <strong>Leonardo Peñaloza-Pacheco's (Cornell)</strong> answer is that immigration isn't one shock — it's three simultaneous shocks that largely cancel each other out.</p>
+            <p>He analyzes the Venezuelan exodus to Colombia — <strong>2.5 million migrants, 6% of Colombia's population</strong> — and decomposes the effect into three forces acting simultaneously: (1) <em>productivity rise</em> — Venezuelan workers, many with manufacturing skills, raised output per worker in receiving firms; (2) <em>labor market markdown increase</em> — migrants without work permits crowded into informal self-employment, compressing the outside option that normally constrains firms' ability to suppress wages; (3) <em>product market markup decrease</em> — cost-constrained Venezuelan consumers made the customer base more price-sensitive, limiting firms' ability to charge above-cost prices.</p>
+            <p>The net result: labor productivity rises 3%, wages stay flat, and <strong>firm profits increase by 6%</strong>. The gains from migration go to firms, not workers. Migrants themselves earn less than native workers despite often being better educated — Venezuelans had 50% higher college graduation rates than Colombians, but earned 20% less.</p>
+            <p>The critical institutional factor driving (2): <strong>migrants without work permits cannot access formal labor markets</strong>, so they concentrate in street-level self-employment. This compresses the informal "outside option" that keeps formal wages from being too low. Grant migrants formal work rights, and firms lose the ability to exploit the markdown. <em>Immigrant rights protection is not just humanitarian — it structurally prevents wage suppression for everyone.</em></p>
+
+            <div class="term-note">
+              <span class="term-note-label">Key terms</span>
+              <strong>Markdown</strong> (labor market power): how much below productivity a firm pays workers — higher when firms can suppress wages because workers have few alternatives. <strong>Markup</strong> (product market power): how much above cost a firm prices — higher when consumers are price-insensitive. Immigration simultaneously raises markdowns (bad for workers) and lowers markups (good for consumers) while raising productivity. The wage stays flat but the distribution of gains shifts sharply toward firms.
+            </div>
+
+            <div class="term-note is-discussant">
+              <span class="term-note-label">Discussant — Kisun Choi (Bank of Korea)</span>
+              <p style="margin:0 0 10px 0;">Choi praised the natural experiment design but raised five methodological concerns:</p>
+              <ol style="margin:0 0 0 20px;padding:0;font-size:14px;line-height:1.7;">
+                <li><strong>Composition vs. compression</strong> — firm-average wages can fall when low-wage migrants join even if native workers' wages are unchanged. Tracking native wages separately would clarify whether real wage suppression is occurring.</li>
+                <li><strong>Decomposition vs. identification</strong> — the three-factor decomposition may be mathematically constructed rather than independently identified. Confidence intervals on each component are needed.</li>
+                <li><strong>Self-employment demand channel</strong> — migrant workers don't only crowd supply-side self-employment; migrant consumers may also increase demand for it. Both directions need accounting.</li>
+                <li><strong>Instrument validity</strong> — using proximity to Venezuela as an instrument for migrant density is standard but requires ruling out other proximity-driven economic differences.</li>
+                <li><strong>General equilibrium analysis</strong> — the full welfare model in the paper, which integrates labor, product, and household consumption markets, was not presented and would be valuable for macro researchers.</li>
+              </ol>
+            </div>
+
+            <div class="context-card">
+              <div class="context-card-label">Additional context</div>
+              <h4>The Borjas-Card wage debate and this paper's contribution</h4>
+              <p>Immigration economics has been divided for 30 years between two camps. <strong>Borjas</strong>: immigration hurts low-skill native wages, particularly in the most directly competing occupations. <strong>Card</strong> (Nobel 2021): empirically, average wage effects are near zero — even the Mariel boatlift produced no measurable Miami wage decline. Both can't be fully right using the same data. Peñaloza-Pacheco's framework offers a resolution: <strong>both are partially right</strong> because three forces offset each other, leaving the average at zero while hiding significant redistribution underneath. The zero isn't "no effect" — it's "three large effects canceling."</p>
+              <div class="further-read">
+                <span class="further-read-label">Further reading</span>
+                <a href="https://www.leonardopenalozapacheco.com/" target="_blank" rel="noopener">Leonardo Peñaloza-Pacheco's homepage</a> (Cornell) · George Borjas, <em>"Immigration Economics"</em> · David Card's <a href="https://davidcard.berkeley.edu/papers/mariel-impact.pdf" target="_blank" rel="noopener">Mariel boatlift paper</a> · <a href="https://www.kdi.re.kr/" target="_blank" rel="noopener">KDI</a> foreign worker research
+              </div>
+            </div>
+            </div>
+          </div>
+          </div>
 
         <div class="tab-content" id="key-8a">
           <ol class="key-points">
@@ -4286,6 +4934,12 @@
         </div>
 
         <div class="tab-content active" id="sum-8b">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+          <div class="summary-kr">
           <div class="summary-text">
             <p class="lead">AI 시대에 <strong>"왜 여전히 숙련 인재가 대도시에만 몰려야 하지?"</strong> 라는 질문을 정면에서 다룬 논문입니다.</p>
 
@@ -4359,7 +5013,52 @@
               </div>
             </div>
           </div>
-        </div>
+                  </div>
+          <div class="summary-en">
+            <div class="summary-text">
+            <p class="lead">Every previous technology wave — electricity, IT — made skilled workers concentrate even more heavily in large cities. <strong>AI may be the first technology to reverse this</strong>: it automates the cognitive tasks that make big cities economically attractive in the first place.</p>
+
+            <p><strong>Ziqian Song (Sciences Po)</strong> tests whether AI adoption in China is reshaping where different workers choose to live. Using firm and population data from 2010–2020 — before generative AI but after meaningful industrial AI adoption — combined with a spatial equilibrium model, Song estimates the effect on urban sorting.</p>
+
+            <p>The AI investment measure is inventive: public AI R&amp;D subsidies are tracked as they flow from government through universities into firms, creating regional variation in AI intensity not driven by pre-existing firm characteristics.</p>
+
+            <p><strong>The results are counter-intuitive:</strong></p>
+            <ul class="inline-list">
+              <li><strong>Skilled workers' share in large cities fell</strong> — some high-skill workers dispersed toward medium-sized cities as AI automated the agglomeration-dependent tasks that previously anchored them to dense urban centers</li>
+              <li><strong>Unskilled workers flowed into large cities</strong> — because AI automation of cognitive tasks increased demand for non-automatable services (care, delivery, cleaning, food) that cluster in dense settings</li>
+              <li><strong>Total output increased, wage inequality narrowed</strong> — the skilled/unskilled wage gap compressed</li>
+            </ul>
+
+            <p>The key mechanism is the interaction between agglomeration effects and AI-driven structural change. When Song shuts off agglomeration in simulations, the welfare gains mostly disappear. The practical implication: <strong>policies that ease low-skill workers' entry into large cities generate larger returns in an AI economy than policies attracting more high-skill workers</strong>.</p>
+
+            <p>For immigration policy: loosening urban hukou restrictions for low-skill migrants produces more economic gain in an AI-intensive world than loosening restrictions for skilled migrants. The standard assumption — focus integration on high-value talent — may be exactly backwards.</p>
+
+            <div class="term-note is-discussant">
+              <span class="term-note-label">Discussant — Dongkyu Seo (Bank of Korea)</span>
+              <p style="margin:0 0 10px 0;">Seo opened with a now-quoted line: <em>"The real question this paper asks is: what will Claude do to San Francisco? Answer: fewer programmers, more janitorial jobs, and the remaining programmers find their offices are cleaner."</em></p>
+              <p style="margin:0 0 10px 0;">His five technical suggestions:</p>
+              <ol style="margin:0 0 0 20px;padding:0;font-size:14px;line-height:1.7;">
+                <li><strong>Include task creation</strong> — AI eliminates existing tasks but also generates new ones (prompt engineering, AI oversight, data labeling). Models that only include task displacement will overestimate disruption.</li>
+                <li><strong>Model more capable AI</strong> — the paper uses GPT-3.5/4-era benchmarks; frontier AI today and tomorrow is substantially more capable. Run scenarios with higher AI productivity assumptions.</li>
+                <li><strong>Simulate near-full automation</strong> — what does the urban geography look like at the extreme of cognitive task automation?</li>
+                <li><strong>Include physical AI infrastructure</strong> — data centers and power infrastructure are locating in specific places; that will reshape urban geography independently of where workers live.</li>
+                <li><strong>Disaggregate beyond skilled/unskilled</strong> — lawyers, doctors, teachers, and engineers face very different AI exposure profiles within "skilled."</li>
+              </ol>
+            </div>
+
+            <details class="context-card">
+              <summary class="context-card-label">Additional context</summary>
+              <h4>Why this research is pioneering — AI meets spatial economics</h4>
+              <p>The economic literature on AI has overwhelmingly focused on "which jobs disappear" and "how do wages change." Song's paper adds a third question: <strong>"where do people live?"</strong> This is the first paper to rigorously estimate AI's effect on spatial sorting, filling a major gap between the labor economics and urban economics literatures. The theoretical foundation is Acemoglu and Restrepo's task-based automation framework, extended into a spatial equilibrium — a combination that Seo described as "rare and genuinely valuable."</p>
+              <p>The China 2010–2020 data is unusually good for this analysis because the government distributed AI R&amp;D subsidies widely across universities and firms, creating cross-regional variation that doesn't exist in other countries where AI adoption was driven by private sector dynamics alone.</p>
+              <div class="further-read">
+                <span class="further-read-label">Further reading</span>
+                <a href="https://www.sciencespo.fr/department-economics/directory/song-ziqian/" target="_blank" rel="noopener">Ziqian Song's profile (Sciences Po)</a> · Acemoglu &amp; Restrepo, <a href="https://www.aeaweb.org/articles?id=10.1257/jep.33.2.3" target="_blank" rel="noopener"><em>"Automation and New Tasks"</em></a> (JEP 2019) · Acemoglu &amp; Johnson, <a href="https://www.publicaffairsbooks.com/titles/daron-acemoglu/power-and-progress/9781541702530/" target="_blank" rel="noopener"><em>"Power and Progress"</em></a> (2023)
+              </div>
+            </details>
+            </div>
+          </div>
+          </div>
 
         <div class="tab-content" id="key-8b">
           <ol class="key-points">
@@ -4558,10 +5257,33 @@
           </div>
 
           <div class="tab-content active" id="sum-8c">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+            <div class="summary-kr">
             <p class="summary-text">
               Peking University의 <strong>Karol Mazur</strong>는 <em>중국 농지 개혁</em>이 <strong>"뒤에 남겨진 아이들(left-behind children)"</strong> 현상에 미친 영향을 구조 모형으로 정량 분석했다. 연구 질문: <em>토지 사용권 불안정성이 농촌 이주자가 자녀를 동반하는 대신 남겨두는 결정에 영향을 주는가?</em> OLG(겹침 세대) 모형 + 이주 + 교육 + 불완전 토지시장. 핵심 결과: 토지 개혁(사용권 강화)은 <strong>자녀를 농촌에 남겨두는 확률을 증가</strong>시키지만, 동시에 <strong>도시 체류 경험이 있는 아이들의 대학 진학률도 증가</strong>. Chan &amp; Cloud의 미국 MTO(Moving to Opportunity) 프로그램 정량 분석을 중국 맥락으로 적용한 독창적 연구. Chetty &amp; Hendren의 "이웃 효과" 연구에 대응하는 개발도상국 버전.
             </p>
-          </div>
+                      </div>
+            <div class="summary-en">
+              <div class="summary-text">
+            <p class="summary-text">
+              <strong>Karol Mazur (Peking University HSBC Business School)</strong> quantifies the effects of China's land use right reforms on the "left-behind children" phenomenon — the millions of rural children raised by grandparents while parents work in cities. The setup draws on Chetty and colleagues' US Moving to Opportunity research — the finding that neighborhood of upbringing substantially shapes lifetime outcomes — applied to China's rural-urban divide through a three-generation overlapping-generations model combined with migration decisions and imperfect land markets.
+            </p>
+            <p class="summary-text">
+              The core paradox: land security reforms, which increased land tradability and rental income, were expected to reduce the insurance motive for keeping a family member home to protect the land. Instead, they raised the <strong>economic value of staying to manage newly lucrative land assets</strong>, increasing the share of children left behind. Simultaneously, children who experienced urban upbringing showed higher college attendance rates — confirming the neighborhood effect in the Chinese context.
+            </p>
+            <p class="summary-text">
+              Discussant Hyeseon Shin (Sogang University) noted that the "misplacement of talent" framing in the paper title doesn't fully match the empirical content (which is closer to "the educational effect of urban exposure"), that binary college attendance is a limited outcome measure, and that the instrument is clean but the mechanism — educational resources versus social networks — needs decomposition.
+            </p>
+            <p class="summary-text">
+              <strong>Policy implication:</strong> land reform and urbanization alone will not resolve the left-behind children problem. The <em>hukou</em> system remains the binding constraint on family reunification in cities. Without addressing the structural barrier to children accompanying parents, improving parental economic conditions at home may paradoxically increase family separation.
+            </p>
+              </div>
+            </div>
+            </div>
 
           <div class="tab-content" id="key-8c">
             <ol class="key-points">
@@ -4627,10 +5349,33 @@
           </div>
 
           <div class="tab-content active" id="sum-8d">
+      <div class="transcript-controls" style="padding-bottom:4px;">
+        <span style="color:var(--ink-3);margin-right:8px;font-weight:600;">언어</span>
+        <button class="sum-lang-btn trans-toggle active" data-lang="kr">한국어</button>
+        <button class="sum-lang-btn trans-toggle" data-lang="en">English</button>
+      </div>
+            <div class="summary-kr">
             <p class="summary-text">
               Columbia의 <strong>Shizuka Inoue</strong>는 2차 세계대전 후 일본의 <em>탈식민 과정에서 발생한 인구 충격</em>이 일본 본토의 <strong>기업 근대화와 경제 성장</strong>에 미친 영향을 연구. 패전 후 조선·대만·만주·남태평양 등 식민지에서 <strong>수백만 명의 일본인이 귀환</strong>. 이 귀환은 <em>순수한 노동 공급 충격</em>인지(사람들은 현금·자산을 대부분 가져올 수 없었음 — 입항 검사에서 압수), 아니면 <em>지역별 인구 유입이 집적효과(agglomeration)를 통한 기업 변화를 촉발</em>했는지를 구분. 집적효과와 직종 구성의 역할을 정량적으로 분리하는 것이 이 논문의 기여. 질의응답에서 "1949년 중국의 산업 정책이 동시기 효과일 수 있다", "자본 자산을 가져온 경우는 실제로 얼마나 되나", "집적 외부성 × 부문 구성 효과" 등의 지적.
             </p>
-          </div>
+                      </div>
+            <div class="summary-en">
+              <div class="summary-text">
+            <p class="summary-text">
+              <strong>Shizuka Inoue (Columbia University)</strong> studies Japan's postwar repatriation — roughly 3–4 million Japanese returning from Korea, Taiwan, Manchuria, and Pacific territories between 1945 and 1950, equal to about 5% of Japan's domestic population. Authorities at designated repatriation ports confiscated cash and valuables, leaving returnees with approximately one month's income equivalent. This creates a near-clean <strong>labor supply shock</strong>: returnees brought human capital and skills, but minimal financial capital.
+            </p>
+            <p class="summary-text">
+              The research question is whether the population shock affected firm modernization through a pure labor supply channel (more workers enabling more output) or through <strong>agglomeration effects</strong> — larger local labor markets enabling better worker-firm matching, knowledge spillovers, and organizational upgrading. Inoue uses cross-prefectural variation in returnee settlement patterns to identify the effect.
+            </p>
+            <p class="summary-text">
+              Finding: regions with higher returnee concentration saw measurably <strong>faster firm modernization</strong> — consistent with agglomeration effects contributing to Japan's postwar economic miracle beyond the reconstruction investments that economists have traditionally emphasized.
+            </p>
+            <p class="summary-text">
+              Session Q&amp;A raised three concerns: concurrent effects of China's 1949 industrial policy as a potential confound; whether asset smuggling was more common than the official record suggests; and the challenge of cleanly separating agglomeration externalities from occupational composition effects when white-collar and blue-collar returnees differ systematically.
+            </p>
+              </div>
+            </div>
+            </div>
 
           <div class="tab-content" id="key-8d">
             <ol class="key-points">
@@ -5073,6 +5818,28 @@
       else if (filter === 'ready') show = !session.classList.contains('pending');
       else show = session.dataset.type === filter;
       session.style.display = show ? '' : 'none';
+    });
+  });
+
+  // Summary language toggle
+  document.querySelectorAll('.sum-lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const controls = btn.closest('.transcript-controls');
+      const container = btn.closest('.tab-content');
+      if (!container) return;
+      const btns = controls.querySelectorAll('.sum-lang-btn');
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const kr = container.querySelector('.summary-kr');
+      const en = container.querySelector('.summary-en');
+      if (!kr || !en) return;
+      if (btn.dataset.lang === 'kr') {
+        kr.classList.remove('hidden');
+        en.classList.remove('active');
+      } else {
+        kr.classList.add('hidden');
+        en.classList.add('active');
+      }
     });
   });
 </script>
